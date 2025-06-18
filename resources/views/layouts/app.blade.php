@@ -15,6 +15,8 @@
   <body @php(body_class()) class="font-inter text-fashl-black">
     @php(wp_body_open())
 
+    @include('partials.pre-order-notification')
+
     <div id="app">
       <a class="sr-only focus:not-sr-only" href="#main">
         {{ __('Skip to content', 'sage') }}
@@ -23,7 +25,7 @@
       @include('sections.header')
 
       {{-- Main content area, including potential sidebar --}}
-      <div class="container mx-auto px-4 pt-20 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
+      <div class="container mx-auto px-4 pt-28 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
         <main id="main" class="main lg:col-span-3">
           @yield('content')
         </main>

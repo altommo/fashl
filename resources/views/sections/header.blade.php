@@ -1,4 +1,4 @@
-<header class="fixed top-0 w-full z-50 bg-fashl-cream shadow-sm">
+<header class="fixed top-8 w-full z-50 bg-fashl-cream shadow-sm">
   <div class="container mx-auto px-4 py-4 flex items-center justify-between">
     {{-- Logo --}}
     <a href="{{ home_url('/') }}" class="flex items-center">
