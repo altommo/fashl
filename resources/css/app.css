@@ -4,11 +4,4 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Temporary font definitions until tailwind.config.js can be updated */
-body {
-    font-family: 'Inter', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6, .font-heading {
-    font-family: 'Montserrat', sans-serif;
-}
+/* Font definitions are now handled by tailwind.config.js */
