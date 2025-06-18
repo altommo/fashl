@@ -4,6 +4,7 @@
   @include('partials.hero-banner')
   @include('partials.featured-capsule-carousel')
   @include('partials.ugc-gallery-preview')
+  @include('partials.newsletter-living-report-teaser')
 
   @if (! have_posts())
     <x-alert type="warning">
