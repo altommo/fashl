@@ -20,7 +20,16 @@
 
 Sage brings proper PHP templating and modern JavaScript tooling to WordPress themes. Write organized, component-based code using Laravel Blade, enjoy instant builds and CSS hot-reloading with Vite, and leverage Laravel's robust feature set through Acorn.
 
+
 [Read the docs to get started](https://roots.io/sage/docs/installation/)
+
+## Fashl UI Specification
+
+The project includes a comprehensive design reference outlining the structure
+and styling conventions used across the theme. See
+[docs/website-elements-spec.md](docs/website-elements-spec.md) for a detailed
+breakdown of layout utilities, component guidance, and accessibility
+considerations.
 
 ## Sponsors
 
