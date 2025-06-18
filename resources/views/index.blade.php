@@ -2,6 +2,7 @@
 
 @section('content')
   @include('partials.hero-banner')
+  @include('partials.featured-capsule-carousel')
 
   @if (! have_posts())
     <x-alert type="warning">
