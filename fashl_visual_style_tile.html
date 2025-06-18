@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FASHL Visual Style Tile</title>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #F9F6F1;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.4;
+            color: #1A1A1A;
+        }
+        
+        .style-tile {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: #1A1A1A;
+            color: #FEFCF7;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .brand-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+            text-transform: lowercase;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0 0 20px 0;
+            color: #1A1A1A;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Color Palette */
+        .color-palette {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        /* Base color swatch styles */
+        .color-swatch {
+            flex: 1;
+            min-width: 120px;
+            height: 100px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-end;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .swatch-warm-white {
+            background: #FEFCF7;
+            color: #1A1A1A;
+            border: 1px solid #E5E5E5;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+        }
+        
+        .swatch-black {
+            background: #1A1A1A;
+            color: #FEFCF7;
+        }
+        
+        .swatch-sage {
+            background: #9CAF88;
+            color: #FEFCF7;
+        }
+        
+        .swatch-gray {
+            background: #F5F5F5;
+            color: #1A1A1A;
+            border: 1px solid #E5E5E5;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+        }
+        
+        .swatch-cream {
+            background: #F9F6F1;
+            color: #1A1A1A;
+            border: 1px solid #E5E5E5;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+        }
+        
+        /* Typography */
+        .typography-grid {
+            display: grid;
+            gap: 24px;
+        }
+        
+        .type-example {
+            padding: 20px;
+            background: #FEFCF7;
+            border-radius: 8px;
+        }
+        
+        .type-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        
+        .h1-sample {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin: 0;
+            color: #1A1A1A;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .h2-sample {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            color: #1A1A1A;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .body-sample {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            margin: 0;
+            color: #1A1A1A;
+            line-height: 1.5;
+        }
+        
+        .button-sample {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0;
+            color: #1A1A1A;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* UI Components */
+        .component-showcase {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            width: 280px;
+            flex-shrink: 0;
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #9CAF88 0%, #7A9B6B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1A1A1A;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .product-desc {
+            font-size: 14px;
+            color: #666;
+            margin: 0 0 12px 0;
+            line-height: 1.4;
+        }
+        
+        .product-price {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin: 0 0 16px 0;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 300px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #1A1A1A;
+            color: #FEFCF7;
+        }
+        
+        .btn-primary:hover {
+            background: #333;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #1A1A1A;
+            border: 2px solid #1A1A1A;
+        }
+        
+        .btn-secondary:hover {
+            background: #1A1A1A;
+            color: #FEFCF7;
+        }
+        
+        .btn-accent {
+            background: #9CAF88;
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background: #7A9B6B;
+        }
+        
+        /* Email Template */
+        .email-template {
+            background: white;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            flex-shrink: 0;
+            position: relative;
+        }
+        
+        .email-note {
+            position: absolute;
+            top: -25px;
+            left: 0;
+            font-size: 11px;
+            color: #666;
+            background: #FFF3CD;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #FFEAA7;
+        }
+        
+        .email-header {
+            background: #1A1A1A;
+            color: #FEFCF7;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .email-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .email-content {
+            padding: 20px;
+        }
+        
+        .email-subject {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #1A1A1A;
+            text-transform: lowercase;
+        }
+        
+        .email-preheader {
+            font-size: 12px;
+            color: #666;
+            margin: 0 0 16px 0;
+            font-style: italic;
+        }
+        
+        .email-body {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333;
+            margin: 0 0 16px 0;
+        }
+        
+        /* Social Media */
+        .social-showcase {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .social-post {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        .instagram-post {
+            width: 280px;
+        }
+        
+        .social-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #9CAF88, #7A9B6B);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .social-content {
+            padding: 16px;
+        }
+        
+        .social-caption {
+            font-size: 14px;
+            line-height: 1.4;
+            margin: 0 0 8px 0;
+        }
+        
+        .social-hashtags {
+            font-size: 12px;
+            color: #9CAF88;
+            font-weight: 500;
+        }
+        
+        .story-post {
+            width: 140px;
+            position: relative;
+        }
+        
+        .story-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #1A1A1A, #333);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .story-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+        }
+        
+        .story-text {
+            background: rgba(255,255,255,0.9);
+            padding: 8px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        /* Navigation */
+        .nav-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .website-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            background: white;
+            border: 1px solid #E5E5E5;
+            border-radius: 8px;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .nav-menu span {
+            font-weight: 500;
+            text-transform: lowercase;
+            cursor: pointer;
+        }
+        
+        .cart-icon {
+            font-size: 20px;
+        }
+        
+        /* Form Elements */
+        .form-elements {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        
+        .input-field, .select-field {
+            padding: 12px 16px;
+            border: 2px solid #E5E5E5;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            flex: 1;
+            min-width: 140px;
+            transition: border-color 0.2s ease;
+        }
+        
+        .input-field:focus, .select-field:focus {
+            outline: none;
+            border-color: #9CAF88;
+        }
+        
+        .input-field:disabled, .select-field:disabled {
+            background-color: #F5F5F5;
+            color: #999;
+            cursor: not-allowed;
+        }
+        
+        .input-error {
+            border-color: #E74C3C;
+        }
+        
+        .input-error:focus {
+            border-color: #E74C3C;
+        }
+        
+        .error-message {
+            font-size: 12px;
+            color: #E74C3C;
+            margin-top: 4px;
+        }
+        
+        .input-field::placeholder {
+            color: #999;
+            text-transform: lowercase;
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .color-palette {
+                flex-direction: column;
+            }
+            
+            .color-swatch {
+                min-width: auto;
+                height: 80px;
+            }
+            
+            .component-showcase {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .product-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .brand-name {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="style-tile">
+        <div class="header">
+            <h1 class="brand-name">fashl</h1>
+        </div>
+        
+        <div class="content">
+            <!-- Color Palette -->
+            <div class="section">
+                <h2 class="section-title">color palette</h2>
+                <div class="color-palette">
+                    <div class="color-swatch swatch-warm-white">
+                        <span>warm white<br>#FEFCF7</span>
+                    </div>
+                    <div class="color-swatch swatch-black">
+                        <span>true black<br>#1A1A1A</span>
+                    </div>
+                    <div class="color-swatch swatch-sage">
+                        <span>sage (seasonal)<br>#9CAF88</span>
+                    </div>
+                    <div class="color-swatch swatch-gray">
+                        <span>soft gray<br>#F5F5F5</span>
+                    </div>
+                    <div class="color-swatch swatch-cream">
+                        <span>cream<br>#F9F6F1</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Typography -->
+            <div class="section">
+                <h2 class="section-title">typography</h2>
+                <div class="typography-grid">
+                    <div class="type-example">
+                        <div class="type-label">H1 HEADLINES (Montserrat Bold)</div>
+                        <div class="h1-sample">the perfect midi skirt</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">H2 SUBHEADS (Montserrat Bold)</div>
+                        <div class="h2-sample">trending now</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">BODY TEXT (Inter Regular)</div>
+                        <div class="body-sample">Clean, readable body text that works perfectly on mobile devices and maintains excellent readability across all screen sizes.</div>
+                    </div>
+                    
+                    <div class="type-example">
+                        <div class="type-label">BUTTONS (Inter Semibold)</div>
+                        <div class="button-sample">SHOP NOW</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="section">
+                <h2 class="section-title">button styles</h2>
+                <div class="button-group">
+                    <button class="btn btn-primary">primary button</button>
+                    <button class="btn btn-secondary">secondary button</button>
+                    <button class="btn btn-accent">accent button</button>
+                </div>
+            </div>
+            
+            <!-- UI Components -->
+            <div class="section">
+                <h2 class="section-title">ui components</h2>
+                <div class="component-showcase">
+                    <!-- Product Card -->
+                    <div class="product-card">
+                        <div class="product-image" role="img" aria-label="Decorative gradient background for product card example">
+                            <span>product image</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">midi wrap dress</h3>
+                            <p class="product-desc">Perfect for any occasion</p>
+                            <div class="product-price">£42</div>
+                            <button class="btn btn-primary">shop now</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Email Template -->
+                    <div class="email-template">
+                        <div class="email-note">⚠️ Requires CSS inlining for email clients</div>
+                        <div class="email-header">
+                            <div class="email-logo">fashl</div>
+                        </div>
+                        <div class="email-content">
+                            <div class="email-subject">the tiktok dress everyone's obsessing over (in your size)</div>
+                            <div class="email-preheader">limited-run drop—get it before it's gone</div>
+                            <div class="email-body">
+                                hey emma,<br><br>
+                                meet your new fave: the midi wrap dress giving serious main character energy. runs true to size—no need to guess.<br><br>
+                                —team fashl 💕
+                            </div>
+                            <button class="btn btn-accent">shop now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Social Media Templates -->
+            <div class="section">
+                <h2 class="section-title">social media layouts</h2>
+                <div class="social-showcase">
+                    <!-- Instagram Post -->
+                    <div class="social-post instagram-post">
+                        <div class="social-image" role="img" aria-label="Decorative gradient background for social media example">
+                            <span>1:1 instagram image</span>
+                        </div>
+                        <div class="social-content">
+                            <div class="social-caption">pov: you found the perfect going-out top that doesn't cost your entire paycheck 💸</div>
+                            <div class="social-hashtags">#MyFashlFit #OOTD</div>
+                        </div>
+                    </div>
+                    
+                    <!-- TikTok/Stories -->
+                    <div class="social-post story-post">
+                        <div class="story-image" role="img" aria-label="Decorative gradient background for story format example">
+                            <span>9:16 story/tiktok</span>
+                        </div>
+                        <div class="story-overlay">
+                            <div class="story-text">watch me style one dress three ways</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation & UI Elements -->
+            <div class="section">
+                <h2 class="section-title">navigation elements</h2>
+                <div class="nav-showcase">
+                    <!-- Website Header -->
+                    <div class="website-header">
+                        <div class="logo">fashl</div>
+                        <div class="nav-menu">
+                            <span>shop</span>
+                            <span>about</span>
+                            <span>contact</span>
+                        </div>
+                        <div class="cart-icon">🛒</div>
+                    </div>
+                    
+                    <!-- Form Elements -->
+                    <div class="form-elements">
+                        <input type="email" placeholder="enter your email" class="input-field" aria-label="Email address">
+                        <input type="email" placeholder="enter your email" class="input-field input-error" aria-label="Email address with error">
+                        <select class="select-field" aria-label="Size selection">
+                            <option>select size</option>
+                            <option>xs</option>
+                            <option>s</option>
+                            <option>m</option>
+                        </select>
+                        <input type="text" placeholder="enter your email" class="input-field" disabled aria-label="Disabled input field">
+                    </div>
+                    <div class="error-message">please enter a valid email address</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
