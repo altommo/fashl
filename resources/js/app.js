@@ -19,4 +19,21 @@ window.addEventListener('DOMContentLoaded', () => {
       mobileMenu.classList.add('-translate-y-full'); // Hide the menu
     });
   }
+
+  // Mobile Filters Logic
+  const mobileFilterOpenButton = document.getElementById('mobile-filter-open-button');
+  const mobileFilterPanel = document.getElementById('mobile-filter-panel');
+  const mobileFilterCloseButton = document.getElementById('mobile-filter-close-button');
+
+  if (mobileFilterOpenButton && mobileFilterPanel) {
+    mobileFilterOpenButton.addEventListener('click', () => {
+      mobileFilterPanel.classList.remove('translate-x-full');
+    });
+  }
+
+  if (mobileFilterCloseButton && mobileFilterPanel) {
+    mobileFilterCloseButton.addEventListener('click', () => {
+      mobileFilterPanel.classList.add('translate-x-full');
+    });
+  }
 });
