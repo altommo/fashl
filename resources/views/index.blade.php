@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('partials.page-header')
+  @include('partials.hero-banner')
 
   @if (! have_posts())
     <x-alert type="warning">

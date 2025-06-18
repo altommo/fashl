@@ -4,4 +4,22 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Font definitions are now handled by tailwind.config.js */
+/* Custom Button Components */
+@layer components {
+    .btn {
+        @apply inline-block px-6 py-3 rounded-md text-center transition-colors duration-200
+               font-inter font-semibold text-sm uppercase tracking-wider;
+    }
+
+    .btn-primary {
+        @apply bg-fashl-black text-fashl-white hover:bg-gray-800;
+    }
+
+    .btn-secondary {
+        @apply bg-transparent text-fashl-black border-2 border-fashl-black hover:bg-fashl-black hover:text-fashl-white;
+    }
+
+    .btn-accent {
+        @apply bg-fashl-sage text-fashl-white hover:bg-fashl-sage/80;
+    }
+}
