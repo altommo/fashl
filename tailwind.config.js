@@ -4,6 +4,7 @@ module.exports = {
     './app/**/*.php',
     './resources/views/**/*.php',
     './resources/js/**/*.js',
+    './resources/css/**/*.css', // Add this line to scan CSS files for @apply directives
   ],
   theme: {
     extend: {
