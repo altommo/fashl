@@ -2,9 +2,7 @@
 module.exports = {
   content: [
     './app/**/*.php',
-    './resources/views/**/*.php',
-    './resources/js/**/*.js',
-    './resources/css/**/*.css', // Add this line to scan CSS files for @apply directives
+    './resources/**/*.{php,js,css}',   // include CSS for @apply
   ],
   theme: {
     extend: {
