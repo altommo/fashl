@@ -36,4 +36,21 @@ window.addEventListener('DOMContentLoaded', () => {
       mobileFilterPanel.classList.add('translate-x-full');
     });
   }
+
+  // Filter Checklist Modal Logic
+  const openFilterChecklistModalButton = document.getElementById('open-filter-checklist-modal');
+  const filterChecklistModal = document.getElementById('filter-checklist-modal');
+  const filterChecklistCloseButton = document.getElementById('filter-checklist-close-button');
+
+  if (openFilterChecklistModalButton && filterChecklistModal) {
+    openFilterChecklistModalButton.addEventListener('click', () => {
+      filterChecklistModal.classList.remove('hidden');
+    });
+  }
+
+  if (filterChecklistCloseButton && filterChecklistModal) {
+    filterChecklistCloseButton.addEventListener('click', () => {
+      filterChecklistModal.classList.add('hidden');
+    });
+  }
 });

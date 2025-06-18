@@ -84,7 +84,7 @@
 
         {{-- Filter Checklist Modal Trigger (Placeholder) --}}
         <div class="mt-6 text-center">
-          <button class="font-inter text-sm text-fashl-sage hover:underline">
+          <button id="open-filter-checklist-modal" class="font-inter text-sm text-fashl-sage hover:underline">
             add a filter checklist
           </button>
         </div>
@@ -97,4 +97,6 @@
       </div>
     </div>
   </div>
+
+  @include('partials.filter-checklist-modal')
 @endsection
