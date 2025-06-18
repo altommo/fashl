@@ -9,6 +9,8 @@
     .btn {
         @apply inline-block px-6 py-3 rounded-md text-center transition-colors duration-200
                font-inter font-semibold text-sm uppercase tracking-wider;
+        @reference px-6; /* Explicitly reference px-6 */
+        @reference py-3; /* Explicitly reference py-3 */
     }
 
     .btn-primary {
