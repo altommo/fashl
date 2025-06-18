@@ -3,6 +3,7 @@
 @section('content')
   @include('partials.hero-banner')
   @include('partials.featured-capsule-carousel')
+  @include('partials.ugc-gallery-preview')
 
   @if (! have_posts())
     <x-alert type="warning">
