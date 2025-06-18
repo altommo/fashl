@@ -12,7 +12,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
-  <body @php(body_class())>
+  <body @php(body_class()) class="font-inter text-fashl-black">
     @php(wp_body_open())
 
     <div id="app">
@@ -22,13 +22,14 @@
 
       @include('sections.header')
 
-      <div class="container mx-auto px-4">
-        <main id="main" class="main pt-20">
+      {{-- Main content area, including potential sidebar --}}
+      <div class="container mx-auto px-4 pt-20 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
+        <main id="main" class="main lg:col-span-3">
           @yield('content')
         </main>
 
         @hasSection('sidebar')
-          <aside class="sidebar">
+          <aside class="sidebar lg:col-span-1">
             @yield('sidebar')
           </aside>
         @endif
