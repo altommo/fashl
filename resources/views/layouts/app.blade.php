@@ -6,6 +6,9 @@
     @php(do_action('get_header'))
     @php(wp_head())
 
+    {{-- Google Fonts --}}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
@@ -19,15 +22,17 @@
 
       @include('sections.header')
 
-      <main id="main" class="main pt-20">
-        @yield('content')
-      </main>
+      <div class="container mx-auto px-4">
+        <main id="main" class="main pt-20">
+          @yield('content')
+        </main>
 
-      @hasSection('sidebar')
-        <aside class="sidebar">
-          @yield('sidebar')
-        </aside>
-      @endif
+        @hasSection('sidebar')
+          <aside class="sidebar">
+            @yield('sidebar')
+          </aside>
+        @endif
+      </div>
 
       @include('sections.footer')
     </div>
