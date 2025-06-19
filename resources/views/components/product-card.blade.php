@@ -85,7 +85,14 @@
           <h3 class="font-semibold text-sm mb-1">{{ $title ?? 'Product Title' }}</h3>
           <p class="text-lg font-bold">{{ $price ?? '£XX.XX' }}</p>
         </div>
-        <button class="bg-white text-black p-3 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center" aria-label="Add to Cart">
+        <button 
+          class="bg-white text-black p-3 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center js-add-to-cart" 
+          aria-label="Add to Cart"
+          data-product-id="{{ $productId ?? '1' }}"
+          data-product-title="{{ $title ?? 'Product Title' }}"
+          data-product-price="{{ $price ?? '£XX.XX' }}"
+          data-product-image="{{ $primaryImage ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=100&h=120&fit=crop&auto=format&q=80' }}"
+        >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
           </svg>
@@ -110,7 +117,13 @@
     
     <div class="flex items-center justify-between">
       <span class="text-2xl font-bold text-fashl-black">{{ $price ?? '£XX.XX' }}</span>
-      <button class="btn btn-primary px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+      <button 
+        class="btn btn-primary px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 js-add-to-cart"
+        data-product-id="{{ $productId ?? '1' }}"
+        data-product-title="{{ $title ?? 'Product Title' }}"
+        data-product-price="{{ $price ?? '£XX.XX' }}"
+        data-product-image="{{ $primaryImage ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=100&h=120&fit=crop&auto=format&q=80' }}"
+      >
         add to cart
       </button>
     </div>

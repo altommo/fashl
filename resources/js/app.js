@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (mobileFilterCloseButton && mobileFilterPanel) {
-    mobileFilterCloseButton.addEventListener('click', () => { // Corrected line
+    mobileFilterCloseButton.addEventListener('click', () => {
       mobileFilterPanel.classList.add('translate-x-full');
     });
   }
@@ -350,4 +350,148 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Cart Logic
+  const cartCountSpan = document.querySelector('#main-header .relative .h-5.w-5'); // Select the cart count span in the header
+  let cartItems = JSON.parse(localStorage.getItem('fashl_cart')) || [];
+
+  const updateCartCount = () => {
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCountSpan) {
+      cartCountSpan.textContent = totalItems;
+    }
+    // Update mobile menu cart count as well
+    const mobileCartCount = document.querySelector('#mobile-menu .btn-primary');
+    if (mobileCartCount) {
+      mobileCartCount.textContent = `view cart (${totalItems})`;
+    }
+  };
+
+  const saveCart = () => {
+    localStorage.setItem('fashl_cart', JSON.stringify(cartItems));
+    updateCartCount();
+  };
+
+  const addToCart = (product) => {
+    const existingItem = cartItems.find(item => item.id === product.id);
+    if (existingItem) {
+      existingItem.quantity++;
+    } else {
+      cartItems.push({ ...product, quantity: 1 });
+    }
+    saveCart();
+    console.log('Cart updated:', cartItems);
+  };
+
+  const removeFromCart = (productId) => {
+    cartItems = cartItems.filter(item => item.id !== productId);
+    saveCart();
+    console.log('Item removed from cart:', cartItems);
+    renderCartPage(); // Re-render cart page if on it
+  };
+
+  const updateCartItemQuantity = (productId, newQuantity) => {
+    const item = cartItems.find(item => item.id === productId);
+    if (item) {
+      item.quantity = parseInt(newQuantity, 10);
+      if (item.quantity <= 0) {
+        removeFromCart(productId);
+      } else {
+        saveCart();
+      }
+    }
+    console.log('Quantity updated:', cartItems);
+    renderCartPage(); // Re-render cart page if on it
+  };
+
+  // Event listeners for "Add to Cart" buttons
+  document.querySelectorAll('.js-add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const product = {
+        id: button.dataset.productId,
+        title: button.dataset.productTitle,
+        price: parseFloat(button.dataset.productPrice.replace('£', '')),
+        image: button.dataset.productImage,
+        // Add other relevant product data like size if applicable
+      };
+      addToCart(product);
+    });
+  });
+
+  // Render Cart Page (if on cart page)
+  const cartItemsContainer = document.getElementById('cart-items-container');
+  const cartSubtotalSpan = document.getElementById('cart-subtotal');
+  const cartTotalSpan = document.getElementById('cart-total');
+  const cartShippingSpan = document.getElementById('cart-shipping');
+  const cartEmptyMessage = document.getElementById('cart-empty-message');
+  const cartSummarySection = document.getElementById('cart-summary-section');
+
+  const renderCartPage = () => {
+    if (!cartItemsContainer) return; // Not on the cart page
+
+    cartItemsContainer.innerHTML = ''; // Clear existing items
+    let subtotal = 0;
+    const shipping = 5.00; // Fixed shipping for now
+
+    if (cartItems.length === 0) {
+      if (cartEmptyMessage) cartEmptyMessage.classList.remove('hidden');
+      if (cartSummarySection) cartSummarySection.classList.add('hidden');
+      return;
+    } else {
+      if (cartEmptyMessage) cartEmptyMessage.classList.add('hidden');
+      if (cartSummarySection) cartSummarySection.classList.remove('hidden');
+    }
+
+    cartItems.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
+
+      const itemHtml = `
+        <div class="flex items-center space-x-4 border-b border-fashl-gray pb-4 last:border-b-0 last:pb-0">
+          <img src="${item.image}" alt="${item.title}" class="w-24 h-28 object-cover rounded-md">
+          <div class="flex-grow">
+            <h3 class="font-montserrat text-lg lowercase text-fashl-black leading-tight">${item.title}</h3>
+            <p class="font-inter text-sm text-gray-600">Size: M</p> <!-- Placeholder size -->
+            <p class="font-inter text-base font-semibold text-fashl-black mt-1">£${item.price.toFixed(2)}</p>
+          </div>
+          <div class="flex flex-col items-end space-y-2">
+            <input
+              type="number"
+              min="1"
+              value="${item.quantity}"
+              class="w-16 p-2 border border-fashl-gray rounded-md text-center text-fashl-black focus:outline-none focus:ring-2 focus:ring-fashl-sage js-cart-quantity"
+              data-product-id="${item.id}"
+            >
+            <button class="font-inter text-sm text-red-600 hover:underline js-remove-from-cart" data-product-id="${item.id}">remove</button>
+          </div>
+        </div>
+      `;
+      cartItemsContainer.insertAdjacentHTML('beforeend', itemHtml);
+    });
+
+    // Add event listeners for newly rendered items
+    cartItemsContainer.querySelectorAll('.js-remove-from-cart').forEach(button => {
+      button.addEventListener('click', (event) => {
+        const productId = event.target.dataset.productId;
+        removeFromCart(productId);
+      });
+    });
+
+    cartItemsContainer.querySelectorAll('.js-cart-quantity').forEach(input => {
+      input.addEventListener('change', (event) => {
+        const productId = event.target.dataset.productId;
+        const newQuantity = event.target.value;
+        updateCartItemQuantity(productId, newQuantity);
+      });
+    });
+
+    if (cartSubtotalSpan) cartSubtotalSpan.textContent = `£${subtotal.toFixed(2)}`;
+    if (cartShippingSpan) cartShippingSpan.textContent = `£${shipping.toFixed(2)}`;
+    if (cartTotalSpan) cartTotalSpan.textContent = `£${(subtotal + shipping).toFixed(2)}`;
+  };
+
+  // Initial render of cart page and count on load
+  updateCartCount();
+  renderCartPage();
 });
