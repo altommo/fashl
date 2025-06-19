@@ -1,10 +1,6 @@
 <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
-  <div class="absolute inset-0">
-    <video autoplay muted loop class="w-full h-full object-cover">
-      <source src="@asset('videos/hero-lifestyle.mp4')" type="video/mp4"> {{-- Placeholder video --}}
-    </video>
-    {{-- Fallback image --}}
-    <img src="https://via.placeholder.com/1920x1080/F9F6F1/1A1A1A?text=Hero+Fallback+Image" alt="FASHL Collection" class="w-full h-full object-cover">
+  <div class="absolute inset-0 bg-cover bg-center" 
+       style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&h=1080&fit=crop&auto=format&q=80');">
   </div>
   
   <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>

@@ -13,13 +13,22 @@
 
   <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
     {{-- Loop through example product cards --}}
+    @php
+      $productImages = [
+        ['primary' => 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80', 'hover' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80'],
+        ['primary' => 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&auto=format&q=80', 'hover' => 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&auto=format&q=80&sat=-100'],
+        ['primary' => 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80', 'hover' => 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80&sat=-100'],
+        ['primary' => 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80', 'hover' => 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80&sat=-100'],
+        ['primary' => 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&auto=format&q=80', 'hover' => 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&auto=format&q=80&sat=-100'],
+      ];
+    @endphp
     @for ($i = 0; $i < 9; $i++)
       <x-product-card
         title="product name {{ $i + 1 }}"
         description="a timeless piece"
         price="£{{ rand(20, 100) }}.00"
-        primaryImage="https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Product+{{ $i + 1 }}"
-        hoverImage="https://via.placeholder.com/400x500/F9F6F1/1A1A1A?text=Product+{{ $i + 1 }}+Hover"
+        primaryImage="{{ $productImages[$i % count($productImages)]['primary'] }}"
+        hoverImage="{{ $productImages[$i % count($productImages)]['hover'] }}"
         link="#"
         @if ($i % 3 == 0) isNew @endif
       />

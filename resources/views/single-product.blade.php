@@ -8,7 +8,7 @@
         {{-- Main Image --}}
         <div class="mb-4">
           <img
-            src="https://via.placeholder.com/800x1000/F5F5F5/1A1A1A?text=Main+Product+Image"
+            src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop&auto=format&q=80"
             alt="Main product image"
             class="w-full h-auto object-cover rounded-lg shadow-md"
           >
@@ -17,22 +17,22 @@
         {{-- Thumbnails --}}
         <div class="flex space-x-2 overflow-x-auto pb-2">
           <img
-            src="https://via.placeholder.com/150x180/F9F6F1/1A1A1A?text=Thumb+1"
+            src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=150&h=180&fit=crop&auto=format&q=80"
             alt="Product thumbnail 1"
             class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-fashl-sage"
           >
           <img
-            src="https://via.placeholder.com/150x180/F5F5F5/1A1A1A?text=Thumb+2"
+            src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80"
             alt="Product thumbnail 2"
             class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-fashl-sage transition-colors"
           >
           <img
-            src="https://via.placeholder.com/150x180/F9F6F1/1A1A1A?text=Thumb+3"
+            src="https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80"
             alt="Product thumbnail 3"
             class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-fashl-sage transition-colors"
           >
           <img
-            src="https://via.placeholder.com/150x180/F5F5F5/1A1A1A?text=Thumb+4"
+            src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80"
             alt="Product thumbnail 4"
             class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-fashl-sage transition-colors"
           >
@@ -127,13 +127,15 @@
             <x-product-card
               title="minimalist earrings"
               price="£18.00"
-              image="https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Earrings"
+              primaryImage="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80"
+              hoverImage="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80&sat=-100"
               link="#"
             />
             <x-product-card
               title="classic leather clutch"
               price="£65.00"
-              image="https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Clutch"
+              primaryImage="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format&q=80"
+              hoverImage="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format&q=80&sat=-100"
               link="#"
             />
           </div>

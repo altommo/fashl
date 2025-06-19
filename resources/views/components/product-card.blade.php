@@ -3,27 +3,43 @@
   <div class="relative overflow-hidden">
     {{-- Primary Image with responsive sources --}}
     <picture>
-      <source srcset="{{ $primaryImageWebpSmall ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" media="(max-width: 640px)" type="image/webp">
-      <source srcset="{{ $primaryImageWebpMedium ?? 'https://via.placeholder.com/600x800/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" media="(max-width: 1024px)" type="image/webp">
-      <source srcset="{{ $primaryImageWebpLarge ?? 'https://via.placeholder.com/1200x1600/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" type="image/webp">
+      <source 
+        srcset="{{ $primaryImageWebpSmall ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=400&fit=crop&auto=format&q=80' }} 300w,
+                {{ $primaryImageWebpMedium ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80' }} 600w,
+                {{ $primaryImageWebpLarge ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200&h=1600&fit=crop&auto=format&q=80' }} 1200w" 
+        type="image/webp"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+      >
       <img 
-        src="{{ $primaryImage ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary' }}" 
+        src="{{ $primaryImage ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80' }}" 
         alt="{{ $title ?? 'Product' }}"
         class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 group-active:scale-105"
         loading="lazy"
+        srcset="{{ $primaryImageSmall ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=300&h=400&fit=crop&auto=format&q=80' }} 300w,
+                {{ $primaryImageMedium ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80' }} 600w,
+                {{ $primaryImageLarge ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=1200&h=1600&fit=crop&auto=format&q=80' }} 1200w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
       >
     </picture>
 
     {{-- Hover Image with responsive sources --}}
     <picture class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-      <source srcset="{{ $hoverImageWebpSmall ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" media="(max-width: 640px)" type="image/webp">
-      <source srcset="{{ $hoverImageWebpMedium ?? 'https://via.placeholder.com/600x800/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" media="(max-width: 1024px)" type="image/webp">
-      <source srcset="{{ $hoverImageWebpLarge ?? 'https://via.placeholder.com/1200x1600/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" type="image/webp">
+      <source 
+        srcset="{{ $hoverImageWebpSmall ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=300&h=400&fit=crop&auto=format&q=80' }} 300w,
+                {{ $hoverImageWebpMedium ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80' }} 600w,
+                {{ $hoverImageWebpLarge ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&h=1600&fit=crop&auto=format&q=80' }} 1200w" 
+        type="image/webp"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+      >
       <img 
-        src="{{ $hoverImage ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover' }}" 
+        src="{{ $hoverImage ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80' }}" 
         alt="{{ $title ?? 'Product' }} alternate view"
         class="w-full h-80 object-cover"
         loading="lazy"
+        srcset="{{ $hoverImageSmall ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=300&h=400&fit=crop&auto=format&q=80' }} 300w,
+                {{ $hoverImageMedium ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80' }} 600w,
+                {{ $hoverImageLarge ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1200&h=1600&fit=crop&auto=format&q=80' }} 1200w"
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
       >
     </picture>
     
