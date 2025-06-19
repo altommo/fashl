@@ -10,6 +10,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="@yield('meta_description', 'Sustainable fashion for the modern woman. Shop curated capsule collections at FASHL.')">
+    <meta name="keywords" content="sustainable fashion, women's clothing, capsule wardrobe, ethical fashion">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="@yield('page_title', 'FASHL - Sustainable Fashion')">
+    <meta property="og:description" content="@yield('meta_description', 'Sustainable fashion for the modern woman.')">
+    <meta property="og:image" content="@asset('images/og-image.jpg')">
+    <meta property="og:url" content="{{ url()->current() }}">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ClothingStore",
+      "name": "FASHL",
+      "description": "Sustainable fashion for the modern woman",
+      "url": "{{ home_url() }}"
+    }
+    </script>
   </head>
 
   <body @php(body_class()) class="font-inter text-fashl-black">
@@ -26,7 +47,7 @@
       @include('sections.header')
 
       {{-- Main content area, including potential sidebar --}}
-      <div class="container mx-auto px-4 pt-28 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
+      <div class="container mx-auto px-4 pt-20 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
         <main id="main" class="main lg:col-span-3">
           @yield('content')
         </main>

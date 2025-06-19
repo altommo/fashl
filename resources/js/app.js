@@ -10,13 +10,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (mobileMenuButton && mobileMenu) {
     mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('-translate-y-full'); // Toggle to slide down
+      mobileMenu.classList.toggle('translate-x-full'); // Toggle to slide from right
     });
   }
 
   if (mobileMenuCloseButton && mobileMenu) {
     mobileMenuCloseButton.addEventListener('click', () => {
-      mobileMenu.classList.add('-translate-y-full'); // Hide the menu
+      mobileMenu.classList.add('translate-x-full'); // Hide the menu
     });
   }
 
@@ -57,16 +57,23 @@ window.addEventListener('DOMContentLoaded', () => {
   // Pre-Order Notification Logic
   const preOrderNotification = document.getElementById('pre-order-notification');
   const dismissPreOrderNotificationButton = document.getElementById('dismiss-pre-order-notification');
-  const mainHeader = document.getElementById('main-header');
+  const mainHeader = document.getElementById('main-header'); // Get the header element
 
   if (dismissPreOrderNotificationButton && preOrderNotification) {
     dismissPreOrderNotificationButton.addEventListener('click', () => {
       preOrderNotification.classList.add('hidden');
-      if (mainHeader) {
-        mainHeader.classList.remove('top-12');
-        mainHeader.classList.add('top-0');
-      }
+      // No need to adjust header top position as it's now fixed top-0
     });
   }
 
+  // Header scroll detection for styling (e.g., adding shadow on scroll)
+  if (mainHeader) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) { // Adjust scroll threshold as needed
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
+    });
+  }
 });
