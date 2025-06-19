@@ -45,7 +45,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (mobileFilterCloseButton && mobileFilterPanel) {
-    mobileFilterPanel.classList.add('translate-x-full');
+    mobileFilterCloseButton.addEventListener('click', () => { // Corrected line
+      mobileFilterPanel.classList.add('translate-x-full');
     });
   }
 
