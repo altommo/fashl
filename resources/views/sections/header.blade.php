@@ -55,6 +55,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
             </svg>
           </button>
+
+          {{-- Wishlist Icon --}}
+          <a href="/wishlist" class="relative p-2 hover:text-fashl-sage transition-colors" aria-label="Wishlist">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+            <span id="wishlist-count" class="absolute -top-1 -right-1 bg-fashl-sage text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+          </a>
           
           <button class="relative p-2 hover:text-fashl-sage transition-colors" aria-label="Cart">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
