@@ -140,6 +140,73 @@
             />
           </div>
         </div>
+
+        {{-- Customer Reviews --}}
+        <div class="mt-12">
+          <h3 class="font-montserrat text-xl font-bold lowercase text-fashl-black mb-6">customer reviews</h3>
+          
+          {{-- Review Summary --}}
+          <div class="flex items-center mb-6">
+            <div class="flex text-fashl-sage text-xl mr-2">
+              {{-- Placeholder for 5 stars --}}
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+            </div>
+            <span class="font-inter text-fashl-black font-semibold">4.2 out of 5</span>
+            <span class="font-inter text-gray-600 ml-2">(128 reviews)</span>
+          </div>
+
+          {{-- Individual Reviews --}}
+          <div class="space-y-8">
+            <div class="border-b border-fashl-gray pb-6">
+              <div class="flex text-fashl-sage text-lg mb-2">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              </div>
+              <h4 class="font-montserrat text-lg lowercase font-semibold text-fashl-black mb-2">Absolutely love this dress!</h4>
+              <p class="font-inter text-sm text-fashl-black mb-2">The fabric is so soft and comfortable, and the fit is incredibly flattering. I've received so many compliments!</p>
+              <p class="font-inter text-xs text-gray-600">Reviewed by Jane D. on October 20, 2023</p>
+            </div>
+
+            <div class="border-b border-fashl-gray pb-6">
+              <div class="flex text-fashl-sage text-lg mb-2">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+              </div>
+              <h4 class="font-montserrat text-lg lowercase font-semibold text-fashl-black mb-2">Great quality, minor sizing issue</h4>
+              <p class="font-inter text-sm text-fashl-black mb-2">Beautiful dress and feels very well made. I found it ran a little small in the bust, so I'd recommend sizing up if you're between sizes.</p>
+              <p class="font-inter text-xs text-gray-600">Reviewed by Emily R. on October 15, 2023</p>
+            </div>
+          </div>
+
+          {{-- Write a Review Form --}}
+          <div class="mt-10 bg-fashl-cream p-6 rounded-lg shadow-md">
+            <h4 class="font-montserrat text-lg lowercase font-semibold text-fashl-black mb-4">write a review</h4>
+            <form class="space-y-4">
+              <div>
+                <label for="review-rating" class="font-inter text-sm text-fashl-black block mb-1">your rating</label>
+                <select id="review-rating" class="w-full p-2 border border-fashl-gray rounded-md focus:outline-none focus:ring-2 focus:ring-fashl-sage">
+                  <option value="">Select a rating</option>
+                  <option value="5">★★★★★ (5 stars)</option>
+                  <option value="4">★★★★☆ (4 stars)</option>
+                  <option value="3">★★★☆☆ (3 stars)</option>
+                  <option value="2">★★☆☆☆ (2 stars)</option>
+                  <option value="1">★☆☆☆☆ (1 star)</option>
+                </select>
+              </div>
+              <div>
+                <label for="review-title" class="font-inter text-sm text-fashl-black block mb-1">review title</label>
+                <input type="text" id="review-title" class="w-full p-2 border border-fashl-gray rounded-md focus:outline-none focus:ring-2 focus:ring-fashl-sage" placeholder="e.g., 'Love it!' or 'Great product'">
+              </div>
+              <div>
+                <label for="review-content" class="font-inter text-sm text-fashl-black block mb-1">your review</label>
+                <textarea id="review-content" rows="5" class="w-full p-2 border border-fashl-gray rounded-md focus:outline-none focus:ring-2 focus:ring-fashl-sage" placeholder="Tell us what you think..."></textarea>
+              </div>
+              <div>
+                <label for="review-name" class="font-inter text-sm text-fashl-black block mb-1">your name</label>
+                <input type="text" id="review-name" class="w-full p-2 border border-fashl-gray rounded-md focus:outline-none focus:ring-2 focus:ring-fashl-sage" placeholder="e.g., Jane D.">
+              </div>
+              <button type="submit" class="btn btn-primary w-full">submit review</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
