@@ -4,6 +4,19 @@ import.meta.glob([
 ]);
 
 window.addEventListener('DOMContentLoaded', () => {
+  // PWA Service Worker Registration
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
@@ -287,5 +300,36 @@ window.addEventListener('DOMContentLoaded', () => {
 
   if (heroTaglineElement) {
     typeWriter();
+  }
+
+  // Size Recommendation Modal Logic
+  const sizeRecommendationModal = document.getElementById('sizeRecommendationModal');
+  const openSizeRecommendationModalButton = document.getElementById('open-size-recommendation-modal');
+  const closeSizeRecommendationModalButton = document.getElementById('close-size-recommendation-modal');
+  const sizeRecommendationResult = document.getElementById('size-recommendation-result');
+  const sizeRecommendationForm = sizeRecommendationModal ? sizeRecommendationModal.querySelector('form') : null;
+
+  if (openSizeRecommendationModalButton && sizeRecommendationModal) {
+    openSizeRecommendationModalButton.addEventListener('click', () => {
+      sizeRecommendationModal.classList.remove('hidden');
+      if (sizeRecommendationResult) sizeRecommendationResult.classList.add('hidden'); // Hide previous results
+    });
+  }
+
+  if (closeSizeRecommendationModalButton && sizeRecommendationModal) {
+    closeSizeRecommendationModalButton.addEventListener('click', () => {
+      sizeRecommendationModal.classList.add('hidden');
+    });
+  }
+
+  if (sizeRecommendationForm) {
+    sizeRecommendationForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      // In a real application, you'd send measurements to a backend AI service
+      // For demonstration, just show a dummy result
+      if (sizeRecommendationResult) {
+        sizeRecommendationResult.classList.remove('hidden');
+      }
+    });
   }
 });

@@ -30,6 +30,9 @@
     <noscript><link rel="stylesheet" href="@vite('resources/css/app.css')"></noscript>
     @vite(['resources/js/app.js'])
 
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="@yield('meta_description', 'Sustainable fashion for the modern woman. Shop curated capsule collections at FASHL.')">
     <meta name="keywords" content="sustainable fashion, women's clothing, capsule wardrobe, ethical fashion">
