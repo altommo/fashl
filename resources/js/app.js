@@ -205,4 +205,45 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Wishlist Logic
+  const wishlistButtons = document.querySelectorAll('.js-add-to-wishlist');
+  const wishlistCountSpan = document.getElementById('wishlist-count');
+  let wishlistItems = new Set(); // Using a Set to store unique product IDs
+
+  // Initialize wishlist count from local storage or 0
+  if (localStorage.getItem('fashl_wishlist')) {
+    wishlistItems = new Set(JSON.parse(localStorage.getItem('fashl_wishlist')));
+  }
+  if (wishlistCountSpan) {
+    wishlistCountSpan.textContent = wishlistItems.size;
+  }
+
+  wishlistButtons.forEach(button => {
+    const productId = button.dataset.productId;
+    // Set initial state of button if product is already in wishlist
+    if (wishlistItems.has(productId)) {
+      button.classList.add('is-liked');
+    }
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      
+      if (wishlistItems.has(productId)) {
+        // Remove from wishlist
+        wishlistItems.delete(productId);
+        button.classList.remove('is-liked');
+      } else {
+        // Add to wishlist
+        wishlistItems.add(productId);
+        button.classList.add('is-liked');
+      }
+      
+      // Update count and local storage
+      if (wishlistCountSpan) {
+        wishlistCountSpan.textContent = wishlistItems.size;
+      }
+      localStorage.setItem('fashl_wishlist', JSON.stringify(Array.from(wishlistItems)));
+    });
+  });
 });

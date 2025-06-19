@@ -68,3 +68,9 @@
 .animate-bounce {
   animation: bounce 1s infinite;
 }
+
+/* Wishlist button liked state */
+.js-add-to-wishlist.is-liked svg {
+    fill: currentColor;
+    color: #ef4444; /* Tailwind red-500 */
+}
