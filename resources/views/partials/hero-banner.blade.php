@@ -10,13 +10,13 @@
   <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
   
   <div class="relative z-10 max-w-4xl mx-auto px-4">
-    <h1 class="font-montserrat text-5xl md:text-7xl lg:text-8xl font-bold lowercase text-white leading-tight mb-6 animate-fade-in">
+    <h1 class="font-montserrat text-5xl md:text-7xl lg:text-8xl font-bold lowercase text-white leading-tight mb-6 animate-fade-in-up">
       discover your new season staples
     </h1>
-    <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto font-light">
+    <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto font-light animate-fade-in-up" style="animation-delay: 0.2s;">
       thoughtfully designed pieces for the modern woman
     </p>
-    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up" style="animation-delay: 0.4s;">
       <a href="/shop" class="btn btn-primary text-lg px-12 py-4 bg-white text-black hover:bg-gray-100">
         shop the collection
       </a>

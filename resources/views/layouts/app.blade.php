@@ -9,6 +9,10 @@
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
+    {{-- Preload critical fonts --}}
+    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kYpQ-c7_op-dmPgpC_A.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcCO4qJgIDf3ePaTMl5p.woff2" as="font" type="font/woff2" crossorigin>
+
     <!-- Critical CSS inlined -->
     <style>
       /* Critical above-the-fold styles */

@@ -20,8 +20,6 @@
     .btn {
         @apply inline-block px-6 py-3 rounded-md text-center transition-colors duration-200
                font-inter font-semibold text-sm uppercase tracking-wider;
-        /* Removed @reference directives as they are not part of standard Tailwind v4 implementation.
-           The content configuration in tailwind.config.js should be sufficient. */
     }
 
     .btn-primary {
@@ -39,6 +37,11 @@
 
 /* Custom Animations */
 @keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -56,6 +59,10 @@
 
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out forwards;
 }
 
 .animate-bounce {
