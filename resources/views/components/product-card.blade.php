@@ -8,7 +8,7 @@
 
   {{-- Image container with hover swap (requires Alpine.js for full functionality) --}}
   <div class="relative overflow-hidden">
-    <a href="{{ $link ?? '#' }}">
+    <a href="{{ $link ?? '#' }}" class="focus:outline-none focus:ring-2 focus:ring-fashl-sage rounded-sm">
       <img
         src="{{ $image ?? 'https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Product+Image' }}"
         alt="{{ $title ?? 'Product' }}"
@@ -27,7 +27,7 @@
 
   <div class="p-4">
     <h3 class="mt-2 text-base font-montserrat font-bold lowercase text-fashl-black leading-tight">
-      <a href="{{ $link ?? '#' }}" class="hover:text-fashl-sage">{{ $title ?? 'Product Title' }}</a>
+      <a href="{{ $link ?? '#' }}" class="hover:text-fashl-sage focus:outline-none focus:ring-2 focus:ring-fashl-sage rounded-sm">{{ $title ?? 'Product Title' }}</a>
     </h3>
     @if(isset($description) && $description)
       <p class="mt-1 text-sm text-gray-600">{{ $description }}</p>
