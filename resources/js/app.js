@@ -246,4 +246,46 @@ window.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('fashl_wishlist', JSON.stringify(Array.from(wishlistItems)));
     });
   });
+
+  // Hero Tagline Typing Animation
+  const heroTaglineElement = document.getElementById('hero-tagline');
+  const taglines = [
+    "thoughtfully designed pieces for the modern woman",
+    "sustainable fashion that moves with your life",
+    "curated capsule collections for every season"
+  ];
+  let taglineIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  const typingSpeed = 50; // milliseconds per character
+  const deletingSpeed = 30; // milliseconds per character
+  const delayBetweenTaglines = 1500; // milliseconds
+
+  function typeWriter() {
+    const currentTagline = taglines[taglineIndex];
+    if (isDeleting) {
+      heroTaglineElement.textContent = currentTagline.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      heroTaglineElement.textContent = currentTagline.substring(0, charIndex + 1);
+      charIndex++;
+    }
+
+    let currentSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && charIndex === currentTagline.length) {
+      currentSpeed = delayBetweenTaglines;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      taglineIndex = (taglineIndex + 1) % taglines.length;
+      currentSpeed = typingSpeed;
+    }
+
+    setTimeout(typeWriter, currentSpeed);
+  }
+
+  if (heroTaglineElement) {
+    typeWriter();
+  }
 });
