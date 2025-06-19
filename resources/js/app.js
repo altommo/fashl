@@ -57,10 +57,16 @@ window.addEventListener('DOMContentLoaded', () => {
   // Pre-Order Notification Logic
   const preOrderNotification = document.getElementById('pre-order-notification');
   const dismissPreOrderNotificationButton = document.getElementById('dismiss-pre-order-notification');
+  const mainHeader = document.getElementById('main-header');
 
   if (dismissPreOrderNotificationButton && preOrderNotification) {
     dismissPreOrderNotificationButton.addEventListener('click', () => {
       preOrderNotification.classList.add('hidden');
+      if (mainHeader) {
+        mainHeader.classList.remove('top-12');
+        mainHeader.classList.add('top-0');
+      }
     });
   }
+
 });
