@@ -1,18 +1,31 @@
 <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 touch-manipulation">
   {{-- Product Image Container --}}
   <div class="relative overflow-hidden">
-    <img 
-      src="{{ $primaryImage ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary' }}" 
-      alt="{{ $title ?? 'Product' }}"
-      class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 group-active:scale-105"
-      loading="lazy"
-    >
-    <img 
-      src="{{ $hoverImage ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover' }}" 
-      alt="{{ $title ?? 'Product' }} alternate view"
-      class="absolute inset-0 w-full h-80 object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      loading="lazy"
-    >
+    {{-- Primary Image with responsive sources --}}
+    <picture>
+      <source srcset="{{ $primaryImageWebpSmall ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" media="(max-width: 640px)" type="image/webp">
+      <source srcset="{{ $primaryImageWebpMedium ?? 'https://via.placeholder.com/600x800/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" media="(max-width: 1024px)" type="image/webp">
+      <source srcset="{{ $primaryImageWebpLarge ?? 'https://via.placeholder.com/1200x1600/F5F5F5/9CAF88?text=Product+Primary+Webp' }}" type="image/webp">
+      <img 
+        src="{{ $primaryImage ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary' }}" 
+        alt="{{ $title ?? 'Product' }}"
+        class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 group-active:scale-105"
+        loading="lazy"
+      >
+    </picture>
+
+    {{-- Hover Image with responsive sources --}}
+    <picture class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+      <source srcset="{{ $hoverImageWebpSmall ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" media="(max-width: 640px)" type="image/webp">
+      <source srcset="{{ $hoverImageWebpMedium ?? 'https://via.placeholder.com/600x800/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" media="(max-width: 1024px)" type="image/webp">
+      <source srcset="{{ $hoverImageWebpLarge ?? 'https://via.placeholder.com/1200x1600/F9F6F1/1A1A1A?text=Product+Hover+Webp' }}" type="image/webp">
+      <img 
+        src="{{ $hoverImage ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover' }}" 
+        alt="{{ $title ?? 'Product' }} alternate view"
+        class="w-full h-80 object-cover"
+        loading="lazy"
+      >
+    </picture>
     
     {{-- Quick Actions Overlay (Desktop Hover) --}}
     <div class="absolute inset-0 bg-black/20 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 lg:flex items-center justify-center hidden">

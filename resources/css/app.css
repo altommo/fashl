@@ -20,11 +20,8 @@
     .btn {
         @apply inline-block px-6 py-3 rounded-md text-center transition-colors duration-200
                font-inter font-semibold text-sm uppercase tracking-wider;
-        /* Explicitly reference these utilities as the build is failing to find them.
-           This is typically not needed in Tailwind v4 with correct content config,
-           but serves as a workaround for persistent build issues. */
-        @reference px-6;
-        @reference py-3;
+        /* Removed @reference directives as they are not part of standard Tailwind v4 implementation.
+           The content configuration in tailwind.config.js should be sufficient. */
     }
 
     .btn-primary {
