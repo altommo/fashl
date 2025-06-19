@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-    // Pre-Order Notification Logic
+  // Pre-Order Notification Logic
   const preOrderNotification = document.getElementById('pre-order-notification');
   const dismissPreOrderNotificationButton = document.getElementById('dismiss-pre-order-notification');
 
