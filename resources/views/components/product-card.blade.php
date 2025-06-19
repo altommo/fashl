@@ -46,7 +46,21 @@
     {{-- Quick Actions Overlay (Desktop Hover) --}}
     <div class="absolute inset-0 bg-black/20 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 lg:flex items-center justify-center hidden">
       <div class="flex gap-3">
-        <button class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors open-quick-view" aria-label="Quick View">
+        <button 
+          class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors open-quick-view" 
+          aria-label="Quick View"
+          data-product-id="{{ $productId ?? '1' }}"
+          data-product-title="{{ $title ?? 'Product Title' }}"
+          data-product-description="{{ $description ?? 'A brief description of the product.' }}"
+          data-product-price="{{ $price ?? '£XX.XX' }}"
+          data-product-main-image="{{ $primaryImage ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop&auto=format&q=80' }}"
+          data-product-thumbnails="{{ json_encode([
+            $primaryImage ?? 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=150&h=180&fit=crop&auto=format&q=80',
+            $hoverImage ?? 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80',
+            'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80',
+            'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80'
+          ]) }}"
+        >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>

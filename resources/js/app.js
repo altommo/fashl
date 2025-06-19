@@ -83,14 +83,31 @@ window.addEventListener('DOMContentLoaded', () => {
   const quickViewTitle = document.getElementById('quickViewTitle');
   const quickViewDescription = document.getElementById('quickViewDescription');
   const quickViewPrice = document.getElementById('quickViewPrice');
+  const quickViewThumbnailsContainer = document.getElementById('quickViewThumbnails');
+
 
   // Function to populate and show quick view modal
   const showQuickViewModal = (productData) => {
-    if (quickViewMainImage) quickViewMainImage.src = productData.image;
+    if (quickViewMainImage) quickViewMainImage.src = productData.mainImage;
     if (quickViewTitle) quickViewTitle.textContent = productData.title;
     if (quickViewDescription) quickViewDescription.textContent = productData.description;
     if (quickViewPrice) quickViewPrice.textContent = productData.price;
-    // Add logic for thumbnails, sizes etc. if needed
+    
+    // Clear existing thumbnails
+    if (quickViewThumbnailsContainer) {
+      quickViewThumbnailsContainer.innerHTML = '';
+      // Add new thumbnails
+      productData.thumbnails.forEach(thumbnailUrl => {
+        const img = document.createElement('img');
+        img.src = thumbnailUrl;
+        img.alt = productData.title + ' thumbnail';
+        img.classList.add('w-20', 'h-24', 'object-cover', 'rounded-md', 'cursor-pointer', 'border-2', 'border-transparent', 'hover:border-fashl-sage', 'transition-colors');
+        img.addEventListener('click', () => {
+          quickViewMainImage.src = thumbnailUrl; // Change main image on thumbnail click
+        });
+        quickViewThumbnailsContainer.appendChild(img);
+      });
+    }
 
     if (quickViewModal) {
       quickViewModal.classList.remove('hidden');
@@ -101,14 +118,15 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.open-quick-view').forEach(button => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
-      // Dummy product data for demonstration
-      const dummyProduct = {
-        image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop&auto=format&q=80',
-        title: 'the midi wrap dress',
-        description: 'effortless elegance for any occasion.',
-        price: '£42.00',
+      const productData = {
+        id: button.dataset.productId,
+        title: button.dataset.productTitle,
+        description: button.dataset.productDescription,
+        price: button.dataset.productPrice,
+        mainImage: button.dataset.productMainImage,
+        thumbnails: JSON.parse(button.dataset.productThumbnails),
       };
-      showQuickViewModal(dummyProduct);
+      showQuickViewModal(productData);
     });
   });
 

@@ -1,16 +1,12 @@
-<div id="quickViewModal" class="fixed inset-0 z-50 hidden">
-  <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+<div id="quickViewModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
   <div class="relative h-full flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
       <div class="grid md:grid-cols-2 gap-8 p-8">
         {{-- Product Images --}}
         <div class="space-y-4">
           <img src="https://via.placeholder.com/800x1000/F5F5F5/1A1A1A?text=Main+Product+Image" alt="Product main image" class="w-full h-96 object-cover rounded-lg" id="quickViewMainImage">
-          <div class="flex space-x-2 overflow-x-auto">
-            {{-- Thumbnail images --}}
-            <img src="https://via.placeholder.com/150x180/F9F6F1/1A1A1A?text=Thumb+1" alt="Product thumbnail 1" class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-fashl-sage">
-            <img src="https://via.placeholder.com/150x180/F5F5F5/1A1A1A?text=Thumb+2" alt="Product thumbnail 2" class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-fashl-sage transition-colors">
-            <img src="https://via.placeholder.com/150x180/F9F6F1/1A1A1A?text=Thumb+3" alt="Product thumbnail 3" class="w-20 h-24 object-cover rounded-md cursor-pointer border-2 border-transparent hover:border-fashl-sage transition-colors">
+          <div id="quickViewThumbnails" class="flex space-x-2 overflow-x-auto pb-2">
+            {{-- Thumbnails will be dynamically inserted here --}}
           </div>
         </div>
         
