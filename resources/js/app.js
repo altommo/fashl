@@ -524,4 +524,427 @@ window.addEventListener('DOMContentLoaded', () => {
   // Initial render of cart page and count on load
   updateCartCount();
   renderCartPage();
+
+
+  // Product Filtering Logic (for archive.blade.php)
+  const productGridContainer = document.getElementById('product-grid-container');
+  const productPaginationContainer = document.getElementById('product-pagination-container');
+  const applyFiltersButton = document.getElementById('apply-filters-button');
+  const mobileApplyFiltersButton = document.getElementById('mobile-apply-filters-button');
+  const priceRangeInput = document.getElementById('price-range-input');
+  const priceRangeValueSpan = document.getElementById('price-range-value');
+  const mobilePriceRangeInput = document.getElementById('mobile-price-range-input');
+  const mobilePriceRangeValueSpan = document.getElementById('mobile-price-range-value');
+
+  // Dummy Product Data
+  const allProducts = [
+    {
+      id: 'prod-1', title: 'the midi wrap dress', description: 'effortless elegance', price: 42.00, isNew: true,
+      primaryImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80',
+      category: 'dresses', sizes: ['XS', 'S', 'M', 'L'], color: 'white',
+      thumbnails: ['https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-2', title: 'oversized knit sweater', description: 'cozy comfort', price: 55.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'tops', sizes: ['S', 'M', 'L', 'XL'], color: 'sage',
+      thumbnails: ['https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-3', title: 'high-waisted denim', description: 'classic fit', price: 38.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'bottoms', sizes: ['XS', 'S', 'M', 'L', 'XL'], color: 'black',
+      thumbnails: ['https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-4', title: 'silk camisole', description: 'luxurious feel', price: 29.00, isNew: true,
+      primaryImage: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'tops', sizes: ['XS', 'S', 'M'], color: 'white',
+      thumbnails: ['https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-5', title: 'leather ankle boots', description: 'versatile style', price: 75.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'accessories', sizes: ['5', '6', '7', '8', '9'], color: 'black',
+      thumbnails: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-6', title: 'pleated midi skirt', description: 'elegant and flowy', price: 48.00, isNew: true,
+      primaryImage: 'https://images.unsplash.com/photo-1594736797933-d0601ba2fe65?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1594736797933-d0601ba2fe65?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'bottoms', sizes: ['S', 'M', 'L'], color: 'sage',
+      thumbnails: ['https://images.unsplash.com/photo-1594736797933-d0601ba2fe65?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-7', title: 'minimalist earrings', description: 'subtle statement', price: 18.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80&sat=-100',
+      category: 'accessories', sizes: [], color: 'white',
+      thumbnails: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-8', title: 'classic leather clutch', description: 'everyday essential', price: 65.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop&auto=format&q=80&sat=-100',
+      category: 'accessories', sizes: [], color: 'black',
+      thumbnails: ['https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-9', title: 'organic cotton tee', description: 'soft and breathable', price: 30.00, isNew: true,
+      primaryImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'tops', sizes: ['XS', 'S', 'M', 'L', 'XL'], color: 'white',
+      thumbnails: ['https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-10', title: 'wide-leg linen pants', description: 'relaxed and chic', price: 60.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'bottoms', sizes: ['S', 'M', 'L'], color: 'black',
+      thumbnails: ['https://images.unsplash.com/photo-1582552938357-32b906df40cb?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-11', title: 'maxi summer dress', description: 'breezy and beautiful', price: 70.00, isNew: true,
+      primaryImage: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=600&h=800&fit=crop&auto=format&q=80&sat=-100',
+      category: 'dresses', sizes: ['S', 'M', 'L'], color: 'sage',
+      thumbnails: ['https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+    {
+      id: 'prod-12', title: 'statement necklace', description: 'bold and unique', price: 35.00, isNew: false,
+      primaryImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80',
+      hoverImage: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=500&fit=crop&auto=format&q=80&sat=-100',
+      category: 'accessories', sizes: [], color: 'white',
+      thumbnails: ['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=150&h=180&fit=crop&auto=format&q=80', 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=150&h=180&fit=crop&auto=format&q=80']
+    },
+  ];
+
+  let currentFilters = JSON.parse(localStorage.getItem('fashl_filters')) || {
+    category: [],
+    size: [],
+    color: null,
+    price: 200,
+    page: 1,
+    perPage: 9 // Number of products per page
+  };
+
+  const saveFilters = () => {
+    localStorage.setItem('fashl_filters', JSON.stringify(currentFilters));
+  };
+
+  const renderProducts = (productsToRender) => {
+    if (!productGridContainer) return; // Not on the shop page
+
+    productGridContainer.innerHTML = ''; // Clear existing products
+    productPaginationContainer.innerHTML = ''; // Clear existing pagination
+
+    const startIndex = (currentFilters.page - 1) * currentFilters.perPage;
+    const endIndex = startIndex + currentFilters.perPage;
+    const paginatedProducts = productsToRender.slice(startIndex, endIndex);
+
+    if (paginatedProducts.length === 0) {
+      productGridContainer.innerHTML = '<p class="col-span-full text-center text-fashl-black font-inter text-lg">No products found matching your filters.</p>';
+      return;
+    }
+
+    paginatedProducts.forEach(product => {
+      const productCardHtml = `
+        <div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 touch-manipulation">
+          <div class="relative overflow-hidden">
+            <picture>
+              <source srcset="${product.primaryImage}?w=300&h=400&fit=crop&auto=format&q=80 300w, ${product.primaryImage}?w=600&h=800&fit=crop&auto=format&q=80 600w, ${product.primaryImage}?w=1200&h=1600&fit=crop&auto=format&q=80 1200w" type="image/webp" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw">
+              <img src="${product.primaryImage}" alt="${product.title}" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 group-active:scale-105" loading="lazy"
+                   srcset="${product.primaryImage}?w=300&h=400&fit=crop&auto=format&q=80 300w, ${product.primaryImage}?w=600&h=800&fit=crop&auto=format&q=80 600w, ${product.primaryImage}?w=1200&h=1600&fit=crop&auto=format&q=80 1200w" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw">
+            </picture>
+            <picture class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <source srcset="${product.hoverImage}?w=300&h=400&fit=crop&auto=format&q=80 300w, ${product.hoverImage}?w=600&h=800&fit=crop&auto=format&q=80 600w, ${product.hoverImage}?w=1200&h=1600&fit=crop&auto=format&q=80 1200w" type="image/webp" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw">
+              <img src="${product.hoverImage}" alt="${product.title} alternate view" class="w-full h-80 object-cover" loading="lazy"
+                   srcset="${product.hoverImage}?w=300&h=400&fit=crop&auto=format&q=80 300w, ${product.hoverImage}?w=600&h=800&fit=crop&auto=format&q=80 600w, ${product.hoverImage}?w=1200&h=1600&fit=crop&auto=format&q=80 1200w" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw">
+            </picture>
+            
+            <div class="absolute inset-0 bg-black/20 opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300 lg:flex items-center justify-center hidden">
+              <div class="flex gap-3">
+                <button class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors open-quick-view" aria-label="Quick View"
+                  data-product-id="${product.id}"
+                  data-product-title="${product.title}"
+                  data-product-description="${product.description}"
+                  data-product-price="£${product.price.toFixed(2)}"
+                  data-product-main-image="${product.primaryImage}"
+                  data-product-thumbnails='${JSON.stringify(product.thumbnails)}'
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </button>
+                <button class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors js-add-to-wishlist" aria-label="Add to Wishlist" data-product-id="${product.id}">
+                  <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-active:opacity-100 transition-opacity duration-200 lg:hidden">
+              <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                <div class="text-white">
+                  <h3 class="font-semibold text-sm mb-1">${product.title}</h3>
+                  <p class="text-lg font-bold">£${product.price.toFixed(2)}</p>
+                </div>
+                <button class="bg-white text-black p-3 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center js-add-to-cart" aria-label="Add to Cart"
+                  data-product-id="${product.id}"
+                  data-product-title="${product.title}"
+                  data-product-price="${product.price.toFixed(2)}"
+                  data-product-image="${product.primaryImage}?w=100&h=120&fit=crop&auto=format&q=80"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                </button>
+              </div>
+            </div>
+            
+            ${product.isNew ? `<span class="absolute top-4 left-4 bg-fashl-sage text-white px-3 py-1 text-xs font-bold uppercase rounded-full">new</span>` : ''}
+          </div>
+          
+          <div class="p-6 lg:block hidden">
+            <h3 class="font-montserrat text-xl font-bold lowercase text-fashl-black mb-2 group-hover:text-fashl-sage transition-colors">
+              ${product.title}
+            </h3>
+            <p class="text-gray-600 text-sm mb-4">${product.description}</p>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-2xl font-bold text-fashl-black">£${product.price.toFixed(2)}</span>
+              <button class="btn btn-primary px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 js-add-to-cart"
+                data-product-id="${product.id}"
+                data-product-title="${product.title}"
+                data-product-price="${product.price.toFixed(2)}"
+                data-product-image="${product.primaryImage}?w=100&h=120&fit=crop&auto=format&q=80"
+              >
+                add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      productGridContainer.insertAdjacentHTML('beforeend', productCardHtml);
+    });
+
+    // Re-attach quick view and add to cart listeners for newly rendered products
+    attachProductCardListeners();
+
+    // Render Pagination
+    const totalPages = Math.ceil(productsToRender.length / currentFilters.perPage);
+    if (totalPages > 1) {
+      let paginationHtml = '<nav class="flex space-x-2">';
+      for (let i = 1; i <= totalPages; i++) {
+        paginationHtml += `
+          <a href="#" class="px-4 py-2 border border-fashl-black rounded-md hover:bg-fashl-black hover:text-fashl-white js-pagination-link ${currentFilters.page === i ? 'bg-fashl-black text-fashl-white' : ''}" data-page="${i}">${i}</a>
+        `;
+      }
+      paginationHtml += '</nav>';
+      productPaginationContainer.insertAdjacentHTML('beforeend', paginationHtml);
+
+      productPaginationContainer.querySelectorAll('.js-pagination-link').forEach(link => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          currentFilters.page = parseInt(event.target.dataset.page, 10);
+          saveFilters();
+          applyFilters();
+          window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top of products
+        });
+      });
+    }
+  };
+
+  const applyFilters = () => {
+    let filteredProducts = [...allProducts]; // Start with all products
+
+    // Filter by Category
+    if (currentFilters.category.length > 0) {
+      filteredProducts = filteredProducts.filter(product =>
+        currentFilters.category.includes(product.category)
+      );
+    }
+
+    // Filter by Size
+    if (currentFilters.size.length > 0) {
+      filteredProducts = filteredProducts.filter(product =>
+        currentFilters.size.some(s => product.sizes.includes(s))
+      );
+    }
+
+    // Filter by Color
+    if (currentFilters.color) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.color === currentFilters.color
+      );
+    }
+
+    // Filter by Price
+    filteredProducts = filteredProducts.filter(product =>
+      product.price <= currentFilters.price
+    );
+
+    renderProducts(filteredProducts);
+    saveFilters(); // Save filters after applying
+  };
+
+  const updateFilterUI = () => {
+    // Update Category checkboxes
+    document.querySelectorAll('input[name="category"]').forEach(checkbox => {
+      checkbox.checked = currentFilters.category.includes(checkbox.value);
+    });
+
+    // Update Size checkboxes
+    document.querySelectorAll('input[name="size"]').forEach(checkbox => {
+      checkbox.checked = currentFilters.size.includes(checkbox.value);
+    });
+
+    // Update Color radio buttons
+    document.querySelectorAll('input[name="color"]').forEach(radio => {
+      radio.checked = currentFilters.color === radio.value;
+    });
+
+    // Update Price range slider
+    if (priceRangeInput) {
+      priceRangeInput.value = currentFilters.price;
+      priceRangeValueSpan.textContent = `£${currentFilters.price}`;
+    }
+    if (mobilePriceRangeInput) {
+      mobilePriceRangeInput.value = currentFilters.price;
+      mobilePriceRangeValueSpan.textContent = `£${currentFilters.price}`;
+    }
+  };
+
+  // Event Listeners for Filters
+  if (document.getElementById('filter-category')) {
+    document.getElementById('filter-category').addEventListener('change', (event) => {
+      if (event.target.name === 'category') {
+        if (event.target.checked) {
+          currentFilters.category.push(event.target.value);
+        } else {
+          currentFilters.category = currentFilters.category.filter(cat => cat !== event.target.value);
+        }
+      }
+    });
+  }
+
+  if (document.getElementById('filter-size')) {
+    document.getElementById('filter-size').addEventListener('change', (event) => {
+      if (event.target.name === 'size') {
+        if (event.target.checked) {
+          currentFilters.size.push(event.target.value);
+        } else {
+          currentFilters.size = currentFilters.size.filter(s => s !== event.target.value);
+        }
+      }
+    });
+  }
+
+  if (document.getElementById('filter-color')) {
+    document.getElementById('filter-color').addEventListener('change', (event) => {
+      if (event.target.name === 'color') {
+        currentFilters.color = event.target.value;
+      }
+    });
+  }
+
+  if (priceRangeInput) {
+    priceRangeInput.addEventListener('input', (event) => {
+      currentFilters.price = parseInt(event.target.value, 10);
+      if (priceRangeValueSpan) priceRangeValueSpan.textContent = `£${currentFilters.price}`;
+    });
+  }
+
+  if (mobilePriceRangeInput) {
+    mobilePriceRangeInput.addEventListener('input', (event) => {
+      currentFilters.price = parseInt(event.target.value, 10);
+      if (mobilePriceRangeValueSpan) mobilePriceRangeValueSpan.textContent = `£${currentFilters.price}`;
+    });
+  }
+
+  if (applyFiltersButton) {
+    applyFiltersButton.addEventListener('click', () => {
+      currentFilters.page = 1; // Reset to first page on new filter application
+      applyFilters();
+    });
+  }
+
+  if (mobileApplyFiltersButton) {
+    mobileApplyFiltersButton.addEventListener('click', () => {
+      currentFilters.page = 1; // Reset to first page on new filter application
+      applyFilters();
+      mobileFilterPanel.classList.add('translate-x-full'); // Close mobile filter panel
+    });
+  }
+
+  // Function to attach listeners to product cards (for quick view and add to cart)
+  function attachProductCardListeners() {
+    document.querySelectorAll('.open-quick-view').forEach(button => {
+      button.removeEventListener('click', handleQuickViewClick); // Remove old listeners
+      button.addEventListener('click', handleQuickViewClick); // Add new listeners
+    });
+
+    document.querySelectorAll('.js-add-to-cart').forEach(button => {
+      button.removeEventListener('click', handleAddToCartClick); // Remove old listeners
+      button.addEventListener('click', handleAddToCartClick); // Add new listeners
+    });
+
+    document.querySelectorAll('.js-add-to-wishlist').forEach(button => {
+      button.removeEventListener('click', handleAddToWishlistClick); // Remove old listeners
+      button.addEventListener('click', handleAddToWishlistClick); // Add new listeners
+    });
+  }
+
+  // Handlers for product card buttons (to be re-attached after rendering)
+  function handleQuickViewClick(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const productData = {
+      id: button.dataset.productId,
+      title: button.dataset.productTitle,
+      description: button.dataset.productDescription,
+      price: button.dataset.productPrice,
+      mainImage: button.dataset.productMainImage,
+      thumbnails: JSON.parse(button.dataset.productThumbnails),
+    };
+    showQuickViewModal(productData);
+  }
+
+  function handleAddToCartClick(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const product = {
+      id: button.dataset.productId,
+      title: button.dataset.productTitle,
+      price: parseFloat(button.dataset.productPrice.replace('£', '')),
+      image: button.dataset.productImage,
+    };
+    addToCart(product);
+  }
+
+  function handleAddToWishlistClick(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const productId = button.dataset.productId;
+    
+    if (wishlistItems.has(productId)) {
+      wishlistItems.delete(productId);
+      button.classList.remove('is-liked');
+    } else {
+      wishlistItems.add(productId);
+      button.classList.add('is-liked');
+    }
+    
+    if (wishlistCountSpan) {
+      wishlistCountSpan.textContent = wishlistItems.size;
+    }
+    localStorage.setItem('fashl_wishlist', JSON.stringify(Array.from(wishlistItems)));
+  }
+
+
+  // Initialize filters and render products on shop page load
+  if (productGridContainer) { // Check if on archive/shop page
+    updateFilterUI();
+    applyFilters();
+  }
 });
