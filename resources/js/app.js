@@ -79,12 +79,72 @@ window.addEventListener('DOMContentLoaded', () => {
   // Quick View Modal Logic
   const quickViewModal = document.getElementById('quickViewModal');
   const closeQuickViewButton = document.getElementById('closeQuickView');
-  // You'll need to add event listeners to your product cards or quick view buttons
-  // For example: document.querySelectorAll('.open-quick-view').forEach(button => { ... });
+  const quickViewMainImage = document.getElementById('quickViewMainImage');
+  const quickViewTitle = document.getElementById('quickViewTitle');
+  const quickViewDescription = document.getElementById('quickViewDescription');
+  const quickViewPrice = document.getElementById('quickViewPrice');
+
+  // Function to populate and show quick view modal
+  const showQuickViewModal = (productData) => {
+    if (quickViewMainImage) quickViewMainImage.src = productData.image;
+    if (quickViewTitle) quickViewTitle.textContent = productData.title;
+    if (quickViewDescription) quickViewDescription.textContent = productData.description;
+    if (quickViewPrice) quickViewPrice.textContent = productData.price;
+    // Add logic for thumbnails, sizes etc. if needed
+
+    if (quickViewModal) {
+      quickViewModal.classList.remove('hidden');
+    }
+  };
+
+  // Event listeners for quick view buttons
+  document.querySelectorAll('.open-quick-view').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      // Dummy product data for demonstration
+      const dummyProduct = {
+        image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=800&h=1000&fit=crop&auto=format&q=80',
+        title: 'the midi wrap dress',
+        description: 'effortless elegance for any occasion.',
+        price: '£42.00',
+      };
+      showQuickViewModal(dummyProduct);
+    });
+  });
 
   if (closeQuickViewButton && quickViewModal) {
     closeQuickViewButton.addEventListener('click', () => {
       quickViewModal.classList.add('hidden');
     });
+  }
+
+  // Search Autocomplete Logic
+  const desktopSearchInput = document.getElementById('desktop-search-input');
+
+  // Debounce function
+  const debounce = (func, delay) => {
+    let timeout;
+    return function(...args) {
+      const context = this;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  const showSuggestions = (query) => {
+    if (query.length > 2) { // Only show suggestions for queries longer than 2 characters
+      console.log('Fetching suggestions for:', query);
+      // In a real application, you would make an AJAX request here
+      // and display suggestions in a dropdown below the input.
+    } else {
+      console.log('Query too short for suggestions:', query);
+      // Hide suggestions if query is too short
+    }
+  };
+
+  if (desktopSearchInput) {
+    desktopSearchInput.addEventListener('input', debounce((event) => {
+      showSuggestions(event.target.value);
+    }, 300));
   }
 });

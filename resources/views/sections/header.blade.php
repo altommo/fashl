@@ -20,6 +20,7 @@
           <input 
             type="search" 
             placeholder="search products..."
+            id="desktop-search-input"
             class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-fashl-sage focus:border-transparent"
           >
           <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
