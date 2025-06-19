@@ -1,38 +1,56 @@
-<div class="product-card bg-fashl-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 relative group">
-  {{-- Badge slot for "L-Limited" --}}
-  @if(isset($badge) && $badge)
-    <span class="absolute top-2 left-2 bg-fashl-sage text-fashl-white px-2 py-1 text-xs uppercase rounded z-10">
-      {{ $badge }}
-    </span>
-  @endif
-
-  {{-- Image container with hover swap (requires Alpine.js for full functionality) --}}
+<div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 touch-manipulation">
+  {{-- Product Image Container --}}
   <div class="relative overflow-hidden">
-    <a href="{{ $link ?? '#' }}" class="focus:outline-none focus:ring-2 focus:ring-fashl-sage rounded-sm">
-      <img
-        src="{{ $image ?? 'https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Product+Image' }}"
-        alt="{{ $title ?? 'Product' }}"
-        class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-        loading="lazy"
-      >
-      {{-- Alternate image for hover (uncomment and add src for actual functionality) --}}
-      {{-- <img
-        src="{{ $hoverImage ?? 'https://via.placeholder.com/400x500/F9F6F1/1A1A1A?text=Hover+Image' }}"
-        alt="{{ $title ?? 'Product' }} Hover"
-        class="w-full h-64 object-cover absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        loading="lazy"
-      > --}}
-    </a>
-  </div>
-
-  <div class="p-4">
-    <h3 class="mt-2 text-base font-montserrat font-bold lowercase text-fashl-black leading-tight">
-      <a href="{{ $link ?? '#' }}" class="hover:text-fashl-sage focus:outline-none focus:ring-2 focus:ring-fashl-sage rounded-sm">{{ $title ?? 'Product Title' }}</a>
-    </h3>
-    @if(isset($description) && $description)
-      <p class="mt-1 text-sm text-gray-600">{{ $description }}</p>
+    <img 
+      src="{{ $primaryImage ?? 'https://via.placeholder.com/300x400/F5F5F5/9CAF88?text=Product+Primary' }}" 
+      alt="{{ $title ?? 'Product' }}"
+      class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 group-active:scale-105"
+      loading="lazy"
+    >
+    <img 
+      src="{{ $hoverImage ?? 'https://via.placeholder.com/300x400/F9F6F1/1A1A1A?text=Product+Hover' }}" 
+      alt="{{ $title ?? 'Product' }} alternate view"
+      class="absolute inset-0 w-full h-80 object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+      loading="lazy"
+    >
+    
+    {{-- Quick Actions Overlay --}}
+    <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+      <div class="flex gap-3">
+        <button class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors open-quick-view" aria-label="Quick View">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          </svg>
+        </button>
+        <button class="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-colors" aria-label="Add to Wishlist">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    {{-- NEW badge for new products --}}
+    @if($isNew ?? false)
+      <span class="absolute top-4 left-4 bg-fashl-sage text-white px-3 py-1 text-xs font-bold uppercase rounded-full">
+        new
+      </span>
     @endif
-    <p class="mt-1 text-lg font-semibold text-fashl-black">{{ $price ?? '£XX.XX' }}</p>
-    <a href="{{ $link ?? '#' }}" class="btn btn-primary w-full mt-4">shop now</a>
+  </div>
+  
+  {{-- Product Info --}}
+  <div class="p-6">
+    <h3 class="font-montserrat text-xl font-bold lowercase text-fashl-black mb-2 group-hover:text-fashl-sage transition-colors">
+      {{ $title ?? 'Product Title' }}
+    </h3>
+    <p class="text-gray-600 text-sm mb-4">{{ $description ?? 'A brief description of the product.' }}</p>
+    
+    <div class="flex items-center justify-between">
+      <span class="text-2xl font-bold text-fashl-black">{{ $price ?? '£XX.XX' }}</span>
+      <button class="btn btn-primary px-6 py-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+        add to cart
+      </button>
+    </div>
   </div>
 </div>

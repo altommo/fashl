@@ -18,9 +18,10 @@
         title="product name {{ $i + 1 }}"
         description="a timeless piece"
         price="£{{ rand(20, 100) }}.00"
-        image="https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Product+{{ $i + 1 }}"
+        primaryImage="https://via.placeholder.com/400x500/F5F5F5/1A1A1A?text=Product+{{ $i + 1 }}"
+        hoverImage="https://via.placeholder.com/400x500/F9F6F1/1A1A1A?text=Product+{{ $i + 1 }}+Hover"
         link="#"
-        @if ($i % 3 == 0) badge="new" @endif
+        @if ($i % 3 == 0) isNew @endif
       />
     @endfor
   </div>

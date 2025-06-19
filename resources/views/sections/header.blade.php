@@ -1,28 +1,68 @@
- <header id="main-header" class="fixed top-0 w-full z-50 bg-fashl-white/90 backdrop-blur-sm shadow-sm transition-all duration-300">
-  <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-    {{-- Logo --}}
-    <a href="{{ home_url('/') }}" class="flex items-center">
-      <img src="@asset('images/logo.svg')" alt="{{ $siteName }}" class="max-h-10" />
-    </a>
-
-    {{-- Main Navigation (Desktop) --}}
-    @if (has_nav_menu('primary_navigation'))
-      <nav class="hidden lg:flex space-x-6 font-inter text-base lowercase text-fashl-black" aria-label="{{ wp_get_nav_menu_name('primary_navigation') }}">
-        {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'flex space-x-6', 'echo' => false, 'container' => false]) !!}
-      </nav>
-    @endif
-
-    {{-- Cart Icon & Mobile Menu Toggle --}}
-    <div class="flex items-center space-x-4">
-      {{-- Cart Icon (Desktop) --}}
-      <a href="/cart" class="hidden lg:block text-xl text-fashl-black" aria-label="View cart">🛒</a>
-
-      {{-- Mobile Menu Toggle (Hamburger) --}}
-      <button id="mobile-menu-button" class="lg:hidden p-2 text-fashl-black" aria-label="Open menu">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+<header id="main-header" class="fixed top-0 w-full z-50 bg-fashl-white/95 backdrop-blur-sm shadow-sm transition-all duration-300">
+  {{-- Pre-order notification bar --}}
+  <div class="bg-fashl-sage text-white text-center py-2 text-sm font-medium">
+    <span class="inline-flex items-center gap-2">
+      ⏰ pre-order now and receive your order in 10-14 business days
+      <button id="dismiss-pre-order-notification" class="ml-4 hover:text-gray-200" aria-label="Dismiss notification">✕</button>
+    </span>
+  </div>
+  
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      {{-- Logo --}}
+      <a href="{{ home_url('/') }}" class="font-montserrat text-2xl font-bold lowercase text-fashl-black">
+        fashl
+      </a>
+      
+      {{-- Search Bar (Desktop) --}}
+      <div class="hidden lg:flex flex-1 max-w-md mx-8">
+        <div class="relative w-full">
+          <input 
+            type="search" 
+            placeholder="search products..."
+            class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-fashl-sage focus:border-transparent"
+          >
+          <svg class="absolute left-3 top-2.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+      </div>
+      
+      {{-- Navigation & Actions --}}
+      <div class="flex items-center space-x-6">
+        @if (has_nav_menu('primary_navigation'))
+          <nav class="hidden lg:flex space-x-8">
+            {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'flex space-x-8 font-medium text-fashl-black', 'echo' => false, 'container' => false]) !!}
+          </nav>
+        @endif
+        
+        <div class="flex items-center space-x-4">
+          <button class="p-2 hover:text-fashl-sage transition-colors" aria-label="Search">
+            <svg class="w-5 h-5 lg:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+          
+          <button class="p-2 hover:text-fashl-sage transition-colors" aria-label="Account">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </button>
+          
+          <button class="relative p-2 hover:text-fashl-sage transition-colors" aria-label="Cart">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5L17 18"></path>
+            </svg>
+            <span class="absolute -top-1 -right-1 bg-fashl-sage text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+          </button>
+          
+          <button id="mobile-menu-button" class="lg:hidden p-2" aria-label="Menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

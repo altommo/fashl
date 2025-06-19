@@ -9,7 +9,22 @@
     {{-- Google Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Critical CSS inlined -->
+    <style>
+      /* Critical above-the-fold styles */
+      .btn{display:inline-block;padding:0.75rem 1.5rem;border-radius:0.375rem;text-align:center;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;-webkit-transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);-webkit-transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:200ms;font-family:'Inter',sans-serif;font-weight:600;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.05em;}
+      .btn-primary{background-color:#1A1A1A;color:#FEFCF7;}
+      .btn-primary:hover{background-color:#374151;}
+      .btn-secondary{background-color:transparent;color:#1A1A1A;border-width:2px;border-color:#1A1A1A;}
+      .btn-secondary:hover{background-color:#1A1A1A;color:#FEFCF7;}
+      .btn-accent{background-color:#9CAF88;color:#FEFCF7;}
+      .btn-accent:hover{background-color:#7A9B6B;}
+    </style>
+    
+    <!-- Defer non-critical CSS -->
+    <link rel="preload" href="@vite('resources/css/app.css')" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="@vite('resources/css/app.css')"></noscript>
+    @vite(['resources/js/app.js'])
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="@yield('meta_description', 'Sustainable fashion for the modern woman. Shop curated capsule collections at FASHL.')">
@@ -36,9 +51,6 @@
   <body @php(body_class()) class="font-inter text-fashl-black">
     @php(wp_body_open())
 
-    {{-- Optional pre-order notification bar --}}
-    @include('partials.pre-order-notification')
-
     <div id="app">
       <a class="sr-only focus:not-sr-only" href="#main">
         {{ __('Skip to content', 'sage') }}
@@ -47,7 +59,7 @@
       @include('sections.header')
 
       {{-- Main content area, including potential sidebar --}}
-      <div class="container mx-auto px-4 pt-20 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
+      <div class="container mx-auto px-4 pt-28 grid grid-cols-1 lg:grid-cols-4 lg:gap-8">
         <main id="main" class="main lg:col-span-3">
           @yield('content')
         </main>
@@ -64,5 +76,7 @@
 
     @php(do_action('get_footer'))
     @php(wp_footer())
+
+    @include('partials.quick-view-modal')
   </body>
 </html>

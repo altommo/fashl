@@ -10,7 +10,9 @@
           <x-product-card
             title="capsule {{ $i }}"
             price="£45"
-            image="https://via.placeholder.com/320x400/9CAF88/FFFFFF?text=Capsule+{{ $i }}"
+            primaryImage="https://via.placeholder.com/320x400/9CAF88/FFFFFF?text=Capsule+{{ $i }}"
+            hoverImage="https://via.placeholder.com/320x400/F9F6F1/1A1A1A?text=Capsule+{{ $i }}+Hover"
+            @if($i == 1) isNew @endif
           />
         </div>
         @endfor

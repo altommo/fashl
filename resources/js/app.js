@@ -54,19 +54,18 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Pre-Order Notification Logic
-  const preOrderNotification = document.getElementById('pre-order-notification');
+  // Pre-Order Notification Dismissal Logic (now integrated into header)
   const dismissPreOrderNotificationButton = document.getElementById('dismiss-pre-order-notification');
-  const mainHeader = document.getElementById('main-header'); // Get the header element
+  const preOrderNotificationBar = dismissPreOrderNotificationButton ? dismissPreOrderNotificationButton.closest('div') : null;
 
-  if (dismissPreOrderNotificationButton && preOrderNotification) {
+  if (dismissPreOrderNotificationButton && preOrderNotificationBar) {
     dismissPreOrderNotificationButton.addEventListener('click', () => {
-      preOrderNotification.classList.add('hidden');
-      // No need to adjust header top position as it's now fixed top-0
+      preOrderNotificationBar.classList.add('hidden');
     });
   }
 
   // Header scroll detection for styling (e.g., adding shadow on scroll)
+  const mainHeader = document.getElementById('main-header');
   if (mainHeader) {
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) { // Adjust scroll threshold as needed
@@ -74,6 +73,18 @@ window.addEventListener('DOMContentLoaded', () => {
       } else {
         mainHeader.classList.remove('scrolled');
       }
+    });
+  }
+
+  // Quick View Modal Logic
+  const quickViewModal = document.getElementById('quickViewModal');
+  const closeQuickViewButton = document.getElementById('closeQuickView');
+  // You'll need to add event listeners to your product cards or quick view buttons
+  // For example: document.querySelectorAll('.open-quick-view').forEach(button => { ... });
+
+  if (closeQuickViewButton && quickViewModal) {
+    closeQuickViewButton.addEventListener('click', () => {
+      quickViewModal.classList.add('hidden');
     });
   }
 });
