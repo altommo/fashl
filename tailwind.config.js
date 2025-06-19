@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     './app/**/*.php',
     './resources/**/*.{php,js,css}',   // include CSS for @apply
