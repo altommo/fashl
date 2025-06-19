@@ -6,21 +6,6 @@
   @include('partials.ugc-gallery-preview')
   @include('partials.newsletter-living-report-teaser')
 
-  @if (! have_posts())
-    <x-alert type="warning">
-      {!! __('Sorry, no results were found.', 'sage') !!}
-    </x-alert>
-
-    {!! get_search_form(false) !!}
-  @endif
-
-  @while(have_posts()) @php(the_post())
-    @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
-  @endwhile
-
-  {!! get_the_posts_navigation() !!}
+  {{-- The homepage displays marketing sections only; default posts are hidden. --}}
 @endsection
 
-@section('sidebar')
-  @include('sections.sidebar')
-@endsection
