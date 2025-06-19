@@ -372,30 +372,30 @@ window.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
   };
 
-  const addToCart = (product) => {
-    const existingItem = cartItems.find(item => item.id === product.id);
+  const addToCart = (product, quantity = 1, size = null) => {
+    const existingItem = cartItems.find(item => item.id === product.id && item.size === size);
     if (existingItem) {
-      existingItem.quantity++;
+      existingItem.quantity += quantity;
     } else {
-      cartItems.push({ ...product, quantity: 1 });
+      cartItems.push({ ...product, quantity: quantity, size: size });
     }
     saveCart();
     console.log('Cart updated:', cartItems);
   };
 
-  const removeFromCart = (productId) => {
-    cartItems = cartItems.filter(item => item.id !== productId);
+  const removeFromCart = (productId, size = null) => {
+    cartItems = cartItems.filter(item => !(item.id === productId && (size === null || item.size === size)));
     saveCart();
     console.log('Item removed from cart:', cartItems);
     renderCartPage(); // Re-render cart page if on it
   };
 
-  const updateCartItemQuantity = (productId, newQuantity) => {
-    const item = cartItems.find(item => item.id === productId);
+  const updateCartItemQuantity = (productId, newQuantity, size = null) => {
+    const item = cartItems.find(item => item.id === productId && (size === null || item.size === size));
     if (item) {
       item.quantity = parseInt(newQuantity, 10);
       if (item.quantity <= 0) {
-        removeFromCart(productId);
+        removeFromCart(productId, size);
       } else {
         saveCart();
       }
@@ -404,7 +404,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderCartPage(); // Re-render cart page if on it
   };
 
-  // Event listeners for "Add to Cart" buttons
+  // Event listeners for "Add to Cart" buttons on product cards (grid/carousel)
   document.querySelectorAll('.js-add-to-cart').forEach(button => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
@@ -413,11 +413,38 @@ window.addEventListener('DOMContentLoaded', () => {
         title: button.dataset.productTitle,
         price: parseFloat(button.dataset.productPrice.replace('£', '')),
         image: button.dataset.productImage,
-        // Add other relevant product data like size if applicable
       };
-      addToCart(product);
+      addToCart(product); // Default quantity 1, no size
     });
   });
+
+  // Event listener for "Add to Cart" button on Product Detail Page
+  const pdpAddToCartButton = document.getElementById('pdp-add-to-cart-button');
+  if (pdpAddToCartButton) {
+    pdpAddToCartButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      const productId = pdpAddToCartButton.dataset.productId;
+      const productTitle = pdpAddToCartButton.dataset.productTitle;
+      const productPrice = parseFloat(pdpAddToCartButton.dataset.productPrice);
+      const productImage = pdpAddToCartButton.dataset.productImage;
+      const quantity = parseInt(document.getElementById('pdp-quantity').value, 10);
+      const selectedSizeElement = document.querySelector('input[name="pdp_size"]:checked');
+      const selectedSize = selectedSizeElement ? selectedSizeElement.value : null;
+
+      if (quantity > 0 && selectedSize) {
+        const product = {
+          id: productId,
+          title: productTitle,
+          price: productPrice,
+          image: productImage,
+        };
+        addToCart(product, quantity, selectedSize);
+      } else {
+        alert('Please select a size and quantity.');
+      }
+    });
+  }
+
 
   // Render Cart Page (if on cart page)
   const cartItemsContainer = document.getElementById('cart-items-container');
@@ -452,7 +479,7 @@ window.addEventListener('DOMContentLoaded', () => {
           <img src="${item.image}" alt="${item.title}" class="w-24 h-28 object-cover rounded-md">
           <div class="flex-grow">
             <h3 class="font-montserrat text-lg lowercase text-fashl-black leading-tight">${item.title}</h3>
-            <p class="font-inter text-sm text-gray-600">Size: M</p> <!-- Placeholder size -->
+            <p class="font-inter text-sm text-gray-600">Size: ${item.size || 'N/A'}</p>
             <p class="font-inter text-base font-semibold text-fashl-black mt-1">£${item.price.toFixed(2)}</p>
           </div>
           <div class="flex flex-col items-end space-y-2">
@@ -462,8 +489,9 @@ window.addEventListener('DOMContentLoaded', () => {
               value="${item.quantity}"
               class="w-16 p-2 border border-fashl-gray rounded-md text-center text-fashl-black focus:outline-none focus:ring-2 focus:ring-fashl-sage js-cart-quantity"
               data-product-id="${item.id}"
+              data-product-size="${item.size || ''}"
             >
-            <button class="font-inter text-sm text-red-600 hover:underline js-remove-from-cart" data-product-id="${item.id}">remove</button>
+            <button class="font-inter text-sm text-red-600 hover:underline js-remove-from-cart" data-product-id="${item.id}" data-product-size="${item.size || ''}">remove</button>
           </div>
         </div>
       `;
@@ -474,15 +502,17 @@ window.addEventListener('DOMContentLoaded', () => {
     cartItemsContainer.querySelectorAll('.js-remove-from-cart').forEach(button => {
       button.addEventListener('click', (event) => {
         const productId = event.target.dataset.productId;
-        removeFromCart(productId);
+        const productSize = event.target.dataset.productSize || null;
+        removeFromCart(productId, productSize);
       });
     });
 
     cartItemsContainer.querySelectorAll('.js-cart-quantity').forEach(input => {
       input.addEventListener('change', (event) => {
         const productId = event.target.dataset.productId;
+        const productSize = event.target.dataset.productSize || null;
         const newQuantity = event.target.value;
-        updateCartItemQuantity(productId, newQuantity);
+        updateCartItemQuantity(productId, newQuantity, productSize);
       });
     });
 
