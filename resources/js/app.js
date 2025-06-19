@@ -45,8 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   if (mobileFilterCloseButton && mobileFilterPanel) {
-    mobileFilterCloseButton.addEventListener('click', () => {
-      mobileFilterPanel.classList.add('translate-x-full');
+    mobileFilterPanel.classList.add('translate-x-full');
     });
   }
 
@@ -308,6 +307,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const closeSizeRecommendationModalButton = document.getElementById('close-size-recommendation-modal');
   const sizeRecommendationResult = document.getElementById('size-recommendation-result');
   const sizeRecommendationForm = sizeRecommendationModal ? sizeRecommendationModal.querySelector('form') : null;
+  const recommendedSizeSpan = sizeRecommendationResult ? sizeRecommendationResult.querySelector('span') : null;
 
   if (openSizeRecommendationModalButton && sizeRecommendationModal) {
     openSizeRecommendationModalButton.addEventListener('click', () => {
@@ -325,8 +325,25 @@ window.addEventListener('DOMContentLoaded', () => {
   if (sizeRecommendationForm) {
     sizeRecommendationForm.addEventListener('submit', (event) => {
       event.preventDefault();
-      // In a real application, you'd send measurements to a backend AI service
-      // For demonstration, just show a dummy result
+      // Get form values
+      const height = document.getElementById('height').value;
+      const bust = document.getElementById('bust').value;
+      const waist = document.getElementById('waist').value;
+      const hips = document.getElementById('hips').value;
+
+      let recommendedSize = 'M'; // Default recommendation
+
+      // Simple dummy logic for demonstration
+      if (height < 160 || bust < 85) {
+        recommendedSize = 'S';
+      } else if (height > 175 || bust > 95) {
+        recommendedSize = 'L';
+      }
+
+      if (recommendedSizeSpan) {
+        recommendedSizeSpan.textContent = recommendedSize;
+      }
+      
       if (sizeRecommendationResult) {
         sizeRecommendationResult.classList.remove('hidden');
       }
