@@ -1,4 +1,4 @@
-<div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 touch-manipulation">
+<div class="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-500 touch-manipulation">
   {{-- Product Image Container --}}
   <div class="relative overflow-hidden">
     {{-- Primary Image with responsive sources --}}
