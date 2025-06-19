@@ -138,6 +138,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Search Autocomplete Logic
   const desktopSearchInput = document.getElementById('desktop-search-input');
+  const searchSuggestionsContainer = document.getElementById('search-suggestions');
 
   // Debounce function
   const debounce = (func, delay) => {
@@ -152,11 +153,42 @@ window.addEventListener('DOMContentLoaded', () => {
   const showSuggestions = (query) => {
     if (query.length > 2) { // Only show suggestions for queries longer than 2 characters
       console.log('Fetching suggestions for:', query);
-      // In a real application, you would make an AJAX request here
-      // and display suggestions in a dropdown below the input.
+      // Dummy suggestions for demonstration
+      const dummySuggestions = [
+        'midi wrap dress',
+        'oversized knit sweater',
+        'sustainable denim',
+        'silk camisole',
+        'leather ankle boots',
+        'minimalist earrings',
+        'classic leather clutch',
+      ].filter(item => item.includes(query.toLowerCase()));
+
+      searchSuggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+      if (dummySuggestions.length > 0) {
+        dummySuggestions.forEach(suggestion => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.classList.add('p-2', 'cursor-pointer', 'hover:bg-gray-100', 'text-fashl-black');
+          suggestionItem.textContent = suggestion;
+          suggestionItem.setAttribute('role', 'option');
+          suggestionItem.addEventListener('click', () => {
+            desktopSearchInput.value = suggestion;
+            searchSuggestionsContainer.classList.add('hidden');
+            desktopSearchInput.setAttribute('aria-expanded', 'false');
+            // Optionally trigger a search here
+          });
+          searchSuggestionsContainer.appendChild(suggestionItem);
+        });
+        searchSuggestionsContainer.classList.remove('hidden');
+        desktopSearchInput.setAttribute('aria-expanded', 'true');
+      } else {
+        searchSuggestionsContainer.classList.add('hidden');
+        desktopSearchInput.setAttribute('aria-expanded', 'false');
+      }
     } else {
-      console.log('Query too short for suggestions:', query);
-      // Hide suggestions if query is too short
+      searchSuggestionsContainer.classList.add('hidden');
+      desktopSearchInput.setAttribute('aria-expanded', 'false');
     }
   };
 
@@ -164,5 +196,13 @@ window.addEventListener('DOMContentLoaded', () => {
     desktopSearchInput.addEventListener('input', debounce((event) => {
       showSuggestions(event.target.value);
     }, 300));
+
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', (event) => {
+      if (!desktopSearchInput.contains(event.target) && !searchSuggestionsContainer.contains(event.target)) {
+        searchSuggestionsContainer.classList.add('hidden');
+        desktopSearchInput.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 });
