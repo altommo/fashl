@@ -15,6 +15,7 @@
   <body @php(body_class()) class="font-inter text-fashl-black">
     @php(wp_body_open())
 
+    {{-- Optional pre-order notification bar --}}
     @include('partials.pre-order-notification')
 
     <div id="app">
