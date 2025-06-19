@@ -33,7 +33,12 @@
           {{-- Actions --}}
           <div class="space-y-3">
             <button class="btn btn-primary w-full py-4 text-lg">add to cart</button>
-            <button class="btn btn-secondary w-full py-4 text-lg">add to wishlist</button>
+            <button 
+              class="btn btn-secondary w-full py-4 text-lg js-add-to-wishlist" 
+              data-product-id="quickViewProductId" {{-- Placeholder ID, will be set by JS --}}
+            >
+              add to wishlist
+            </button>
           </div>
           
           {{-- Product Details --}}

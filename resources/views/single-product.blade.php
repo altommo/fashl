@@ -86,6 +86,8 @@
             </label>
           </div>
           <a href="#" class="font-inter text-sm text-fashl-sage mt-2 block hover:underline">view sizing chart</a>
+          {{-- Size Recommendation Engine Placeholder --}}
+          <button class="btn btn-secondary mt-4 text-sm px-4 py-2">get size recommendation</button>
         </div>
 
         {{-- Quantity Selector & Add to Cart --}}

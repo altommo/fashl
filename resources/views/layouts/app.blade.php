@@ -82,5 +82,14 @@
     @php(wp_footer())
 
     @include('partials.quick-view-modal')
+
+    {{-- Placeholder for Advanced Analytics Script --}}
+    <script>
+      // <!-- Global site tag (gtag.js) - Google Analytics -->
+      // window.dataLayer = window.dataLayer || [];
+      // function gtag(){dataLayer.push(arguments);}
+      // gtag('js', new Date());
+      // gtag('config', 'UA-XXXXX-Y'); 
+    </script>
   </body>
 </html>

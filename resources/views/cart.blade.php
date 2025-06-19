@@ -94,6 +94,14 @@
           <p>you have <span class="font-semibold">150 points</span>—£5 discount available.</p>
           <a href="#" class="text-fashl-sage hover:underline">redeem now</a>
         </div>
+
+        {{-- Abandoned Cart Recovery Placeholder --}}
+        @if (!empty($cartItems))
+          <div class="mt-8 p-4 bg-fashl-gray rounded-lg text-center">
+            <p class="font-inter text-sm text-fashl-black mb-2">Don't miss out! Your cart items are waiting.</p>
+            <a href="/checkout" class="btn btn-accent text-sm px-4 py-2">complete your order</a>
+          </div>
+        @endif
       </div>
     </div>
   </div>
